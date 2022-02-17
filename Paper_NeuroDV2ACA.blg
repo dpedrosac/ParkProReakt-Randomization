@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: Paper_NeuroDV2ACA.aux
+Reallocating 'name_of_file' (item size: 1) to 21 items.
+The style file: elsarticle-num-names.bst
+Reallocating 'name_of_file' (item size: 1) to 19 items.
+Database file #1: robustnew10Dec2014.bib
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Warning--empty pages in lagakos+:1984
+You've used 24 entries,
+            2918 wiz_defined-function locations,
+            782 strings with 9112 characters,
+and the built_in function-call counts, 15333 in all, are:
+= -- 1086
+> -- 618
+< -- 13
++ -- 237
+- -- 207
+* -- 1814
+:= -- 2189
+add.period$ -- 26
+call.type$ -- 24
+change.case$ -- 186
+chr.to.int$ -- 24
+cite$ -- 25
+duplicate$ -- 1152
+empty$ -- 1151
+format.name$ -- 278
+if$ -- 2794
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 237
+newline$ -- 127
+num.names$ -- 98
+pop$ -- 413
+preamble$ -- 1
+purify$ -- 187
+quote$ -- 0
+skip$ -- 262
+stack$ -- 0
+substring$ -- 704
+swap$ -- 845
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 204
+warning$ -- 1
+while$ -- 107
+width$ -- 0
+write$ -- 321
+(There was 1 warning)

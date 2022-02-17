@@ -1,0 +1,72 @@
+\begin{figure}[ht]
+\centering
+% \subfigure[][]{%
+%\label{QQplot1}%
+%\includegraphics[width=0.45\textwidth]{qqplot1covar}}
+ \hspace*{4mm}%
+ %\subfigure[][]{%
+ %\label{QQplot2}%
+ %\includegraphics[width=0.45\textwidth]{qqplot2covar}}%
+ \caption{Normal probability plot of  residuals from two fitted models:
+  \protect\subref{QQplot1} $pdq8$ vs. $bdi$;
+ \protect\subref{QQplot2} $pdq8$ vs. $h\&y$ and $bdi$.}
+ \label{QQplots2models}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[ht]
+\centering
+ %\subfigure[][]{%
+ %\label{SCbdipdq}%
+ %\includegraphics[width=0.45\textwidth]{scbdipdq8.png}}
+ \hspace*{4mm}%
+ %\subfigure[][]{%
+ %\label{SChypdq}%
+ %\includegraphics[width=0.45\textwidth]{schypdq8.png}}%
+ \caption{Scatterplot with histogram for:
+  \protect\subref{SCbdipdq} $pdq8$ vs. $bdi$;
+ \protect\subref{SChypdq} $pdq8$ vs. $h\&y$.}
+ \label{Scatters}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[ht]
+\centering
+ %\subfigure[][]{%
+ %\label{Floss2}%
+ %\includegraphics[width=0.45\textwidth]{floss2covar.pdf}}%
+ \hspace*{4mm}%
+ %\subfigure[][]{%
+ %\label{Bias2}%
+ %\includegraphics[width=0.45\textwidth]{bias2covar.pdf}}
+ \caption{Results for model including 3 parameters (the intercept plus 2 covariates corresponding
+to $h\&y$ and $bdi$ -- those with the largest correlation with the response):
+ \protect\subref{Floss2} Loss and
+ \protect\subref{Bias2} Bias, as functions of the number of patients.}
+ \label{2covarplus1}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[ht]
+\centering
+ %\subfigure[][]{%
+ %\label{Floss1}%
+ %\includegraphics[width=0.45\textwidth]{floss1covar.pdf}}%
+ \hspace*{4mm}%
+ %\subfigure[][]{%
+%\label{Floss5}%
+ %\includegraphics[width=0.45\textwidth]{floss5covar.pdf}}%
+ \caption{Losses as a function of $n$. Left-hand panel $q=2$ (just $bdi$) and Right-hand panel $q = 6$ (all prognostic factors).}
+ %\protect\subref{Floss1} Loss function;
+ %\protect\subref{Floss5} Bias function.}
+ \label{1or5Covarplus1}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[ht]
+  \centering
+  %\f[width=0.6\textwidth]{biasloss2covar}
+  \caption{Normalized loss vs. bias for $q=3$: empirical correlated covariates. The symbol ``$\square$'' indicates the performance after
+100 patients, and ``$\smalltriangledown$'' the performance after 240 patients.}
+  \label{NormLossBias}
+\end{figure}

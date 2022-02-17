@@ -1,0 +1,196 @@
+\begin{thebibliography}{24}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Book
+\bibitem[{Rosenberger and Lachin(2016)}]{ros+l:2016}
+\bibinfo{author}{W.~F. Rosenberger}, \bibinfo{author}{J.~L. Lachin},
+  \bibinfo{title}{Randomization in Clinical Trials: Theory and Practice, 2nd
+  edn}, \bibinfo{publisher}{Wiley}, \bibinfo{address}{New York},
+  \bibinfo{year}{2016}.
+%Type = Article
+\bibitem[{Atkinson(1982)}]{aca:82}
+\bibinfo{author}{A.~C. Atkinson},
+\newblock \bibinfo{title}{Optimum biased coin designs for sequential clinical
+  trials with prognostic factors},
+\newblock \bibinfo{journal}{Biometrika} \bibinfo{volume}{69}
+  (\bibinfo{year}{1982}) \bibinfo{pages}{61--67}.
+%Type = Article
+\bibitem[{Atkinson(2002)}]{aca:2002}
+\bibinfo{author}{A.~C. Atkinson},
+\newblock \bibinfo{title}{The comparison of designs for sequential clinical
+  trials with covariate information},
+\newblock \bibinfo{journal}{Journal of the Royal Statistical Society, Series A}
+  \bibinfo{volume}{165} (\bibinfo{year}{2002}) \bibinfo{pages}{349--373}.
+%Type = Article
+\bibitem[{Rosenberger and Sverdlov(2008)}]{ros+sverd:2008}
+\bibinfo{author}{W.~F. Rosenberger}, \bibinfo{author}{O.~Sverdlov},
+\newblock \bibinfo{title}{Handling covariates in the design of clinical
+  trials},
+\newblock \bibinfo{journal}{Statistical Science} \bibinfo{volume}{23}
+  (\bibinfo{year}{2008}) \bibinfo{pages}{404--419}.
+%Type = Article
+\bibitem[{Ma et~al.(2020)Ma, Qin, Li, and Hu}]{MaHuCovar:2020}
+\bibinfo{author}{W.~Ma}, \bibinfo{author}{Y.~Qin}, \bibinfo{author}{Y.~Li},
+  \bibinfo{author}{F.~Hu},
+\newblock \bibinfo{title}{Statistical inference for covariate-adaptive
+  randomization procedures},
+\newblock \bibinfo{journal}{Journal of the American Statistical Association}
+  \bibinfo{volume}{115} (\bibinfo{year}{2020}) \bibinfo{pages}{1488--1497}.
+%Type = Article
+\bibitem[{Sverdlov et~al.(2020)Sverdlov, Ryeznik, and
+  Wong}]{sverdlov2020optimal}
+\bibinfo{author}{O.~Sverdlov}, \bibinfo{author}{Y.~Ryeznik},
+  \bibinfo{author}{W.~K. Wong},
+\newblock \bibinfo{title}{On optimal designs for clinical trials: An updated
+  review},
+\newblock \bibinfo{journal}{Journal of Statistical Theory and Practice}
+  \bibinfo{volume}{14} (\bibinfo{year}{2020}) \bibinfo{pages}{1--29}.
+%Type = Article
+\bibitem[{Pocock and Simon(1975)}]{p+s:75}
+\bibinfo{author}{S.~J. Pocock}, \bibinfo{author}{R.~Simon},
+\newblock \bibinfo{title}{Sequential treatment assignment with balancing for
+  prognostic factors in the controlled clinical trial},
+\newblock \bibinfo{journal}{Biometrics} \bibinfo{volume}{31}
+  (\bibinfo{year}{1975}) \bibinfo{pages}{103--115}.
+%Type = Article
+\bibitem[{Peto et~al.(1998)Peto, Jenkinson, and Fitzpatrick}]{peto1998pdq}
+\bibinfo{author}{V.~Peto}, \bibinfo{author}{C.~Jenkinson},
+  \bibinfo{author}{R.~Fitzpatrick},
+\newblock \bibinfo{title}{{PDQ-39: a review of the development, validation and
+  application of a Parkinson’s} disease quality of life questionnaire and its
+  associated measures},
+\newblock \bibinfo{journal}{Journal of Neurology} \bibinfo{volume}{245}
+  (\bibinfo{year}{1998}) \bibinfo{pages}{S10--S14}.
+%Type = Article
+\bibitem[{Jenkinson et~al.(1997)Jenkinson, Fitzpatrick, Peto, Greenhall, and
+  Hyman}]{jenkinson1997parkinson}
+\bibinfo{author}{C.~Jenkinson}, \bibinfo{author}{R.~Fitzpatrick},
+  \bibinfo{author}{V.~Peto}, \bibinfo{author}{R.~Greenhall},
+  \bibinfo{author}{N.~Hyman},
+\newblock \bibinfo{title}{The {Parkinson's Disease Questionnaire (PDQ-39):
+  development and validation of a Parkinson's} disease summary index score},
+\newblock \bibinfo{journal}{Age and ageing} \bibinfo{volume}{26}
+  (\bibinfo{year}{1997}) \bibinfo{pages}{353--357}.
+%Type = Article
+\bibitem[{Chen et~al.(2017)Chen, Yang, Liu, Li, Bu, Yang, Wang, Shen, Guan,
+  Song et~al.}]{chen2017evaluation}
+\bibinfo{author}{K.~Chen}, \bibinfo{author}{Y.-J. Yang}, \bibinfo{author}{F.-T.
+  Liu}, \bibinfo{author}{D.-K. Li}, \bibinfo{author}{L.-L. Bu},
+  \bibinfo{author}{K.~Yang}, \bibinfo{author}{Y.~Wang},
+  \bibinfo{author}{B.~Shen}, \bibinfo{author}{R.-Y. Guan},
+  \bibinfo{author}{J.~Song}, et~al.,
+\newblock \bibinfo{title}{Evaluation of {PDQ-8 and its relationship with PDQ-39
+  in China}: a three-year longitudinal study},
+\newblock \bibinfo{journal}{Health and quality of life outcomes}
+  \bibinfo{volume}{15} (\bibinfo{year}{2017}) \bibinfo{pages}{1--7}.
+%Type = Book
+\bibitem[{Beck et~al.(1988)Beck, Steer, and Pompili}]{beck1988bhs}
+\bibinfo{author}{A.~T. Beck}, \bibinfo{author}{R.~A. Steer},
+  \bibinfo{author}{M.~Pompili}, \bibinfo{title}{BHS, Beck hopelessness scale:
+  manual}, \bibinfo{publisher}{Psychological corporation San Antonio, TX},
+  \bibinfo{year}{1988}.
+%Type = Article
+\bibitem[{Nasreddine et~al.(2005)Nasreddine, Phillips, B{\'e}dirian,
+  Charbonneau, Whitehead, Collin, Cummings, and
+  Chertkow}]{nasreddine2005montreal}
+\bibinfo{author}{Z.~S. Nasreddine}, \bibinfo{author}{N.~A. Phillips},
+  \bibinfo{author}{V.~B{\'e}dirian}, \bibinfo{author}{S.~Charbonneau},
+  \bibinfo{author}{V.~Whitehead}, \bibinfo{author}{I.~Collin},
+  \bibinfo{author}{J.~L. Cummings}, \bibinfo{author}{H.~Chertkow},
+\newblock \bibinfo{title}{The montreal cognitive assessment, moca: a brief
+  screening tool for mild cognitive impairment},
+\newblock \bibinfo{journal}{Journal of the American Geriatrics Society}
+  \bibinfo{volume}{53} (\bibinfo{year}{2005}) \bibinfo{pages}{695--699}.
+%Type = Article
+\bibitem[{Smith(1984)}]{rls:84b}
+\bibinfo{author}{R.~L. Smith},
+\newblock \bibinfo{title}{Sequential treatment allocation using biased coin
+  designs},
+\newblock \bibinfo{journal}{Journal of the Royal Statistical Society, Series B}
+  \bibinfo{volume}{46} (\bibinfo{year}{1984}) \bibinfo{pages}{519---543}.
+%Type = Book
+\bibitem[{Atkinson et~al.(2007)Atkinson, Donev, and Tobias}]{ADT:2007}
+\bibinfo{author}{A.~C. Atkinson}, \bibinfo{author}{A.~N. Donev},
+  \bibinfo{author}{R.~D. Tobias}, \bibinfo{title}{Optimum Experimental Designs,
+  with SAS}, \bibinfo{publisher}{Oxford University Press},
+  \bibinfo{address}{Oxford}, \bibinfo{year}{2007}.
+%Type = Article
+\bibitem[{Blackwell and Hodges(1957)}]{b+h:57}
+\bibinfo{author}{D.~Blackwell}, \bibinfo{author}{J.~L. Hodges},
+\newblock \bibinfo{title}{Design for the control of selection bias},
+\newblock \bibinfo{journal}{Annals of Mathematical Statistics}
+  \bibinfo{volume}{28} (\bibinfo{year}{1957}) \bibinfo{pages}{449--460}.
+%Type = Article
+\bibitem[{Efron(1971)}]{efr:71}
+\bibinfo{author}{B.~Efron},
+\newblock \bibinfo{title}{Forcing a sequential experiment to be balanced},
+\newblock \bibinfo{journal}{Biometrika} \bibinfo{volume}{58}
+  (\bibinfo{year}{1971}) \bibinfo{pages}{403--417}.
+%Type = Incollection
+\bibitem[{Lagakos and Pocock(1984)}]{lagakos+:1984}
+\bibinfo{author}{S.~W. Lagakos}, \bibinfo{author}{S.~J. Pocock},
+\newblock \bibinfo{title}{Randomization and stratification in cancer clinical
+  trials: an international survey},
+\newblock in: \bibinfo{editor}{M.~E. Buyse}, \bibinfo{editor}{M.~J. Staquet},
+  \bibinfo{editor}{R.~J. Sylvester} (Eds.), \bibinfo{booktitle}{Cancer Clinical
+  Trials: Methods and Practice}, \bibinfo{publisher}{Oxford University Press},
+  \bibinfo{address}{Oxford}, \bibinfo{year}{1984}.
+%Type = Book
+\bibitem[{Burman(1996)}]{bur:96}
+\bibinfo{author}{C.-F. Burman}, \bibinfo{title}{On Sequential Treatment
+  Allocations in Clinical Trials}, \bibinfo{publisher}{Department of
+  Mathematics}, \bibinfo{address}{G\"oteborg}, \bibinfo{year}{1996}.
+%Type = Article
+\bibitem[{Senn et~al.(2010)Senn, Anisimov, and Fedorov}]{senn+val:2010}
+\bibinfo{author}{S.~Senn}, \bibinfo{author}{V.~V. Anisimov},
+  \bibinfo{author}{V.~V. Fedorov},
+\newblock \bibinfo{title}{Comparisons of minimization and {A}tkinson's
+  algorithm},
+\newblock \bibinfo{journal}{Statistics in Medicine} \bibinfo{volume}{29}
+  (\bibinfo{year}{2010}) \bibinfo{pages}{721--730}.
+%Type = Article
+\bibitem[{Cox(1951)}]{cox:51}
+\bibinfo{author}{D.~R. Cox},
+\newblock \bibinfo{title}{Some systematic experimental designs},
+\newblock \bibinfo{journal}{Biometrika} \bibinfo{volume}{38}
+  (\bibinfo{year}{1951}) \bibinfo{pages}{312--323}.
+%Type = Article
+\bibitem[{Atkinson(2014)}]{aca:2014}
+\bibinfo{author}{A.~C. Atkinson},
+\newblock \bibinfo{title}{Selecting a biased-coin design},
+\newblock \bibinfo{journal}{Statistical Science} \bibinfo{volume}{29}
+  (\bibinfo{year}{2014}). \bibinfo{note}{144--163}.
+%Type = Article
+\bibitem[{Liu and Hu(2020)}]{liu2020balancing}
+\bibinfo{author}{Y.~Liu}, \bibinfo{author}{F.~Hu},
+\newblock \bibinfo{title}{Balancing unobserved covariates with
+  covariate-adaptive randomized experiments},
+\newblock \bibinfo{journal}{Journal of the American Statistical Association}
+  (\bibinfo{year}{2020}) \bibinfo{pages}{1--12}.
+%Type = Article
+\bibitem[{Ye et~al.(2021)Ye, Yi, and Shao}]{YeYiShaoBka2022}
+\bibinfo{author}{T.~Ye}, \bibinfo{author}{Y.~Yi}, \bibinfo{author}{J.~Shao},
+\newblock \bibinfo{title}{{Inference on the average treatment effect under
+  minimization and other covariate-adaptive randomization methods}},
+\newblock \bibinfo{journal}{Biometrika} \bibinfo{volume}{109}
+  (\bibinfo{year}{2021}) \bibinfo{pages}{33--47}.
+  \DOIprefix\doi{10.1093/biomet/asab015}.
+%Type = Article
+\bibitem[{Ball et~al.(1993)Ball, Smith, and Verdinelli}]{ball+:93}
+\bibinfo{author}{F.~G. Ball}, \bibinfo{author}{A.~F.~M. Smith},
+  \bibinfo{author}{I.~Verdinelli},
+\newblock \bibinfo{title}{Biased coin designs with a {Bayesian} bias},
+\newblock \bibinfo{journal}{Journal of Statistical Planning and Inference}
+  \bibinfo{volume}{34} (\bibinfo{year}{1993}) \bibinfo{pages}{403--421}.
+
+\end{thebibliography}

@@ -1,0 +1,117 @@
+\begin{table}[ht]
+\centering {\scriptsize \caption{Correlation matrix between the response and prognostic factors.}
+\label{Correltab}
+\begin{tabular}{ccccccc} \toprule
+&         $Gender$ & $Age$   & $h\&y$   & $bdi$     & $moca$    & $pdq8$ \\ \midrule
+$Gender$ & 1.0000 &  0.0792 &  0.0180 &  -0.1218 & -0.0376 &  -0.0807\\
+$Age$ & &  1.0000 &  0.2266 &  -0.0513 &  -0.4766 &  -0.1415\\
+$h\&y$ & & &   1.0000 &  0.3250 &  -0.6435 &  0.3318 \\
+$bdi$ &  &  &  & 1.0000 &  -0.2689 &  0.6402 \\
+$moca$ &  &  &  &  & 1.0000 &  0.0419 \\
+$pdq8$ & &  &  &  &  &  1.0000 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+\efloatseparator
+ 
+\begin{table}[ht]
+\centering {\scriptsize \caption{Order of addition of covariates to $pdq8$ model (via stepwise regression).}
+\label{ForSelect}
+\begin{tabular}{ccccccccc} \toprule
+Order of addition & Source & SSE        &   SSR             & d.f. & MSE    & MSR         & F  & Prob$>$F \\ \midrule
+1& Intercept               &                &                   &   1  &       &             &         &  \\
+2& $bdi$                   & \num{4.4768E3} & \num{5.5662E3}    &   1  & 172.1852 & \num{5.5662E3} & 32.3266 & \num{5.560E-6} \\
+3& $Age$                   & \num{4.4280E3} & \num{5.6150E3}    &   1  & 177.1190 & 48.8340        &  0.2757 & 0.6041 \\
+4& $Gender$                & \num{4.3909E3} & \num{5.6521E3}    &   1  & 182.9536 & 37.0898        &  0.2027 & 0.6566 \\
+5& $h\&y$                  & \num{4.3756E3} & \num{5.6674E3}    &   1  & 190.2426 & 15.3065        &  0.0805 & 0.7792 \\
+6& $moca$                  & \num{4.3593E3} & \num{5.6836E3}    &   1  & 198.1522 & 16.2311        &  0.0819  & 0.7774 \\
+\bottomrule
+\multicolumn{9}{l}{SSE - sum of square error; SSR - sum of squares of treatments; d.f. - degrees of freedom; MSE - mean square error (MSE=SSE/(n-d.f.));}\\
+\multicolumn{9}{l}{MSR - incremental mean of squares of treatments (MSR=SSR$_i$-SSR$_{i-1}$); F - F ratio (F=MSR/MSE).}\\
+\end{tabular}
+}
+\end{table}
+\efloatseparator
+ 
+\begin{table}[ht]
+\centering {\scriptsize \caption{Performance of allocation rules after 100 and 240 patients (model
+with correlated empirical covariates).}
+\label{Perf_Correlated}
+\begin{tabular}{ccccccc} \toprule
+ & & \multicolumn{2}{c}{After 100 patients} & &\multicolumn{2}{c}{After 240 patients} \\ \cmidrule{3-4} \cmidrule{6-7}
+Covariates & Rule & Loss & Bias & & Loss & Bias \\ \cmidrule{1-4} \cmidrule{6-7}
+1 & D & 0.0160 & 1.0000 & & 0.0065 & 1.0000 \\
+  & R & 1.9908 & -0.0019 & & 1.9885 & 0.0148 \\
+& A & 0.4021 & 0.0846 & & 0.3997 & 0.0492 \\
+& E &  0.1859 & 0.3334 & & 0.0780 & 0.3290 \\
+& MwC & 0.5117 & 0.2490 & & 0.4237 & 0.2468 \\ \midrule
+2 & D & 0.0389 & 1.0000 & & 0.0161 & 1.0000 \\
+  & R & 3.0153 & -0.0017 & & 3.0135 & -0.0054 \\
+& A & 0.6156 & 0.1160 & & 0.6051 & 0.0838 \\
+& E &  0.3985 & 0.3257 & & 0.1658 & 0.3420 \\
+& MwC & 1.1135 & 0.2444 & & 0.9239 & 0.2462 \\ \midrule
+5 & D & 0.1604 & 1.0000 & & 0.0644 & 1.0000 \\
+  & R & 5.9765 & -0.0011 & & 6.0126 & -0.0076 \\
+& A & 1.2598 & 0.1737 & & 1.2277 & 0.1131 \\
+& E & 1.4093 & 0.3414 & & 0.6211 & 0.3389 \\
+& MwC & 3.0933 & 0.2862 & & 2.4296 & 0.2863 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+\efloatseparator
+ 
+\begin{table}[ht]
+\centering {\scriptsize \caption{Performance of allocation rules after 100 and 240 patients when the
+design is obtained with $q$ covariates and used in a model including $r$ covariates (models
+with correlated empirical covariates).}
+\label{Perf_CorruptedModels}
+\begin{tabular}{ccccc} \toprule
+ & & \multicolumn{1}{c}{After 100 patients} & &\multicolumn{1}{c}{After 240 patients} \\ \cmidrule{2-3} \cmidrule{4-5}
+Covariates ($q/r$) & Rule & Loss & & Loss \\ \cmidrule{1-3} \cmidrule{4-5}
+6/3 & D & 0.0388 & & 0.0161 \\
+  & R & 3.0151   & & 3.0134\\
+& A & 0.6150   & & 0.6049 \\
+& E & 0.3986   & & 0.1658 \\
+& MwC & 1.1136 & & 0.9238 \\ \midrule
+3/6 & D & 0.1594 & & 0.0642 \\
+  & R &   5.9607 & & 5.9545 \\
+& A &   1.2690 & & 1.2334 \\
+& E &   1.4152 & & 0.6330 \\
+& MwC & 3.1035 & & 2.41724 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+\efloatseparator
+ 
+\begin{table}[ht]
+\centering {\scriptsize \caption{Performance of allocation rules after 100 and 240 patients(model with non correlated covariates).}
+\label{Perf_NCCorrelated}
+\begin{tabular}{ccccccc} \toprule
+ & & \multicolumn{2}{c}{After 100 patients} & &\multicolumn{2}{c}{After 240 patients} \\ \cmidrule{3-4} \cmidrule{6-7}
+Covariates & Rule & Loss & Bias & & Loss & Bias \\ \cmidrule{1-4} \cmidrule{6-7}
+2 & D & 0.0389 & 1.0000 & & 0.0161 & 1.0000 \\
+  & R & 3.0153 & -0.0017 & & 3.0135 & -0.0054 \\
+& A & 0.6156 & 0.1205 & & 0.6056 & 0.0845 \\
+& E &  0.3975 & 0.3257 & & 0.1662 & 0.3420 \\
+& MwC & 1.0851 & 0.2447 & & 0.8763 & 0.2487 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+\efloatseparator
+ 
+\begin{table}[ht]
+\centering {\scriptsize \caption{Performance of allocation rules A and R for 100 and 240 patients - percentage of loss per patient.}
+\label{Perf_100and240}
+\begin{tabular}{cccccc} \toprule
+  & \multicolumn{2}{c}{For 100 patients} & &\multicolumn{2}{c}{For 240 patients} \\ \cmidrule{2-3} \cmidrule{5-6}
+ Rule & \% Loss & Bias & & \% Loss &  Bias \\ \cmidrule{1-3} \cmidrule{5-6}
+   A & 0.62 & 0.12 & & 0.25 & 0.08 \\
+   R & 3.02 & 0.00 & & 1.26 & 0.00 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
