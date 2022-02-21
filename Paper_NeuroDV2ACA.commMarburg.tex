@@ -1,0 +1,585 @@
+\pdfoutput=1
+\documentclass[number,12pt,review]{elsarticle}
+%\AtBeginDocument{\let\latin\relax}
+\usepackage{times, url}
+\usepackage{amsmath,amssymb}
+\usepackage{lineno}
+\usepackage{booktabs,here}
+%\usepackage{geometry}
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{paralist}
+\usepackage{color,multirow,siunitx,rotating}
+\usepackage[usenames,dvipsnames,svgnames]{xcolor}
+\usepackage{stmaryrd,mathabx}
+\usepackage[nofiglist,notablist]{endfloat}
+\usepackage{xr}
+\usepackage{hyperref}
+\usepackage[textwidth=2cm, textsize=small]{todonotes}
+%\usepackage{showkeys}
+\usepackage{acronym}
+\hypersetup{
+  colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue,anchorcolor=blue,
+  breaklinks,psdextra, pdfauthor=author
+}
+\newcounter{spcounter}\renewcommand{\thespcounter}{\arabic{spcounter}}
+\newcommand{\speciallabel}[1]{% \speciallabel{<label>}
+  \refstepcounter{spcounter}\text{\thespcounter}\label{#1}%
+  }
+\modulolinenumbers[5]
+\setlength{\marginparwidth}{2cm}
+%
+\makeatletter
+\newcounter{savesection}
+\newcounter{apdxsection}
+\renewcommand\appendix{\par
+  \setcounter{savesection}{\value{section}}%
+  \setcounter{section}{\value{apdxsection}}%
+  \setcounter{subsection}{0}%
+  \gdef\thesection{\@Alph\c@section}}
+\newcommand\unappendix{\par
+  \setcounter{apdxsection}{\value{section}}%
+  \setcounter{section}{\value{savesection}}%
+  \setcounter{subsection}{0}%
+  \gdef\thesection{\@arabic\c@section}}
+\makeatother
+%
+% Posicionamento (liberal) das figuras:
+%\renewcommand{\textfraction}{0}
+%\renewcommand{\topfraction}{1}
+%\renewcommand{\bottomfraction}{1}
+\def\spacingset#1{\renewcommand{\baselinestretch}{#1}\small\normalsize} \spacingset{1}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n}
+%\renewcommand{\floatpagefraction}{0.1}
+% Moves floats to the end of the document
+\allowdisplaybreaks
+\pdfcompresslevel=4
+\pdfadjustspacing=1
+\hypersetup{pdfstartview={XYZ null null 1.00}}
+\hypersetup{pageanchor=false}
+
+\SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n}
+\newcommand{\pinv}{\operatorname{pinv}}
+\newcommand{\ldet}{\operatorname{ldet}}
+\newcommand{\tr}{\operatorname{tr}}
+%\pdfminorversion=7
+%
+
+\bibliographystyle{elsarticle-num-names}
+
+\begin{document}
+\journal{Contemporary Clinical Trials}
+\begin{frontmatter}
+  \title{Randomizing a Clinical Trial in Neuro-Degenerative Disease}
+  \author[lse]{Anthony C. Atkinson{\corref{cor1}}}\ead{A.C.Atkinson@lse.ac.uk}
+	\author[isec,deq]{Belmiro P.M. Duarte}\ead{bduarte@isec.pt}
+	\author[marburg1,marburg2]{David Pedrosa}\ead{david.pedrosa@staff.uni-marburg.de}
+	\author[marburg1]{Marlena van Munster}\ead{marlena.vanmunster@uni-marburg.de}
+  \cortext[cor1]{Corresponding author.}
+	\address[lse]{Department of Statistics, London School of Economics, London WC2A 2AE, United Kingdom.}
+  \address[isec]{Polytechnic Institute of Coimbra, ISEC, Department of Chemical \& Biological Engineering,
+	Rua Pedro Nunes, 3030--199 Coimbra, Portugal.}
+	\address[deq]{Univ Coimbra, {CIEPQPF}, Department of Chemical Engineering, Rua S\'{\i}lvio Lima --- P\'olo~II, 3030--790 Coimbra, Portugal.}
+	\address[marburg1]{Department of Neurology, University Hospital Marburg, 35043 Marburg, Germany}
+	\address[marburg2]{Center for Mind, Brain and Behavior, Philipps-University Marburg, 35032 Marburg, Germany}
+
+%
+\begin{abstract}\label{sec:abstract}
+The paper studies randomization rules for a sequential two-treatment, two-site clinical trial in neuro-degenerative disease. An important feature is that we have values of responses and five potential prognostic factors from a sample of 144 patients similar to those to be enrolled in the trial.  Analysis of this sample provides a model for trial analysis. The comparison of allocation rules is made by simulation yielding measures of loss due to imbalance and of potential bias. A major novelty of the paper is  use of this sample, via a  two-stage algorithm, to provide an empirical distribution of covariates for the simulation: sampling of a correlated multivariate normal distribution is followed by transformation to variables following the empirical marginal distributions. Five allocation rules are evaluated. The paper concludes with some comments on general aspects of the evaluation of such rules and provides a recommendation for two allocation rules, one for each site, depending on the target number of patients to be enrolled.
+\end{abstract}
+
+\begin{keyword}
+  bias \sep biased-coin design \sep empirical multivariate distribution \sep loss \sep minimization \sep randomization.
+\end{keyword}
+\end{frontmatter}
+
+\linenumbers%
+
+\section{Introduction}
+
+\label{introsec}
+
+We study methods for randomized treatment allocation for a clinical trial on a complex intervention for \ac{PD}-patients. We describe the background to the clinical trial and the forthcoming economic burden of this disease on advanced societies in the next section. The purpose of this paper is to compare various randomization methods in sequential trials in which patients present with prognostic factors which may be included in the analysis of the data and so should be allowed for in the randomization scheme. We use data from a sample of patients similar to those to be included in the trial.
+
+Our focused objective is to provide a scientific basis for the randomization scheme for this particular trial, based on empirical evidence. It is intended that our results will contribute to justify this particular aspect of the trial protocol.
+
+Because we have a clear objective we do not provide a general survey of randomization methods in clinical trials. Such a survey can be found in \citet{ros+l:2016}. Several of the methods we compare are derived from forms of randomized treatment allocation introduced by \citet{aca:82} using the methods of optimum experimental design. These were extended by \citet{aca:2002} to include comparisons of the statistical properties of the designs, particularly the loss of efficiency due to randomization and potential bias from the ability to guess the next treatment to be allocated. Both that paper and \citet{ros+sverd:2008} contain background material on randomization in sequential clinical trials in the presence of covariates. A recent review of inference after covariate-adaptive randomization is \citet{MaHuCovar:2020}. The review of \citet{sverdlov2020optimal} focuses on the use of the methods of optimum experimental design in clinical trials.
+
+The paper is organized as follows. The medical background and the structure of the proposed two-treatment trial, to be performed at two sites,  are described in \S\ref{backsec}, followed in \S\ref{datmodsec} by the statistical analysis of the sample values of  the five covariates (prognostic factors) which may be used in the analysis of the trial results. The analysis of the sample results shows that two variables are important and that a linear regression model should be appropriate for analysis of the clinical trial. The use of randomised forms of the sequential construction of optimum experimental design in sequential clinical trials is introduced in \S\ref{DesSec}. The two important measures of the performance of a trial design, loss and bias, are formalized in \S\ref{BiasLossSec}. Protection against the biases that can be introduced by the absence of proper randomization is especially important in an unblinded trial such as the one we describe. Section~\ref{FiveruleSec} presents five allocation rules, ranging from deterministic allocation which minimizes the variance of the estimated treatment difference, to random selection of the treatment to be allocated. We also investigate a randomized version of the minimization rule of \citet{p+s:75}.
+
+We use simulation to compare these five rules. A major novelty of our approach is the use of the empirical sample of potential covariates to provide a sampling distribution of covariates, which have some correlations, rather than assuming independent normal distributions for covariate values. The algorithm is in two stages described in \S\ref{sampsec}: sampling of correlated multivariate normal variates is followed by marginal transformation of the sampled normal variates  to samples from the empirical marginal distributions of the covariates. The main numerical results on the comparison of allocation rules is in \S\ref{sampsec}. Extensions in \S\ref{extsec} explore (i) the effects of designing for either more or fewer covariates than are used in the analysis and (ii) how comparisons of trial designs change if  independent normal covariates are sampled instead of those with the empirical distribution. The final section discusses a few more general topics, including a further sampling rule and the use of a concept admissibility in the comparison of trial designs. The paper concludes with recommendations for randomization rules at the two trial sites.
+
+\section{Background}
+
+\label{backsec}
+
+\subsection{The Trial}
+
+\label{trialsec}
+
+\ac{PD} ranges among the most common neurodegenerative disorders. The disease is mainly characterized by its cardinal motor symptoms bradykinesia, tremor and rigidity. Yet, growing evidence indicates major disability by non-motor symptoms such as depression, apathy and sleep disturbances \citep{Bloem2021-ov}. The very heterogeneous disease phenotype may account for health-related quality of life restrictions but also severly burden (informal) caregivers \citep{Kalia2015-ty}. With ageing Western societies and the first symptoms of \ac{PD} around the age of 60, current forecasts point to increasing strains on healthcare systems, but also to increasing needs for universal care for the often very specific problems associated with the progressive \ac{PD} \citep{Heinzel2018-ff, Dorsey2018-mc}.
+
+In Germany, care coordination is primarily the responsibility of the resident neurologists and, in some cases, general practitioners. The former in particular, are usually only
+able to offer a consultations once a quarter. As \citet{Prell2020-bc} point out, the coordination of therapies that are tailored to individual needs and the involvement of specially trained care professionals such as Parkinson Nurses can hence only rarely be implemented. People in structurally less developed regions suffer from even greater undersupply, to the point of complete absence for non-mobile patients who rely on home visits, such as people living in nursing homes. Not only does this counteract efforts towards a holistic approach to PD care \citep{rajan2020integrated}, for these patients care coordination often falls to less specialized professionals such as nurses or primary care physicians, who can quickly become overwhelmed with complex questions \citep{Stangl2020-na}. Particularly with increasing disease severity, when multi-layered symptoms develop or very specific problems arise, there is a need for innovative solutions that could universally improve the care of people with \ac{PD}.
+
+Technological advances seem to be a viable way to provide regular care for people with \ac{PD} \citep{achey2014past}. The attractiveness of digital healthcare solutions lies in their potential to mitigate both mobility-related barriers and economic obstacles. Furthermore, digital offerings are suitable for assessing disease severity among many other
+symptoms patients suffer from, especially in movement disorders suchb as \ac{PD} which may be evaluated reliably via sensors \citep{kleinholdermann2019remote, tabatabaei2020machine, Kleinholdermann2021-st}. It does therefore not surprise that more and more eHealth solutions are developed, with some digital applications already being implemented in Germany \citep{Stangl2020-na}. Yet, nationwide and validated approaches are still lacking \citep{van2020building}, so that these solutions wait to find their way into standard care and remain available only to very few patients.
+
+As part of the project ”ParkProReakt”\footnote{https://innovationsfonds.g-ba.de/projekte/neue-versorgungsformen/parkproreakt-proaktive-
+statt-reaktive-symptomerkennung-bei-parkinson-patientinnen-und-patienten.43}, a cross-sectoral, proactive, demand-oriented and technology-supported care model is being developed. The aim of this project is to improve healthcare and to foster \ac{PD}-patients' quality of life. Furthermore, it aims to relieve the burden on caregivers by supporting them in assessing changes in the course of the disease through by means of digital solutions. This project is funded within the framework of a programme of the Federal Joint Committee (\ac{G-BA}), which falls under the responsibility of the Federal Ministry of Health. In the sense of a scientific review, the proposed model is to be evaluated within the framework of a study. The objectives are to i) examine the perception of the nursing and medical staff working in the model, ii) to investigate the effects of the complex intervention on the everyday life of \ac{PD}-patients and iii) to assess both economic benefits and effects on quality of life. The study will sequentially include a defined number of subjects at two structurally varying centres of different sizes, located in a metroplitan focus practice in Hamburg and a tertiary care centre located at a rather rural part of Germany in Marburg. Both centres will accompany and treat a number of patients who are allocated into control subjects (receiving standard care) and the complex care protocol we developed. According to the primary outcome, changes in quality of life measured with the \ac{PDQ-39} \citep{jenkinson1997parkinson} will be tested. Assuming moderate effects about the size of minimal clinical changes \citep{horvath2017changes} equivalent to the ones encountered in previous complex interventions \citep{Butterfield2017-uc, Mestre2021-od}, we calculated a sample size of 292 necessary patients (Marburg: 92/92 subjects and Hamburg: 54/54 subjects) to achieve a power of ?? \%.
+
+\subsection{Variables}
+\label{varsec}
+
+Various factors of importance may characterise \ac{PD}-patients but may especially impact on their perceived quality of life. It may be argued, that the envisaged questionnaires pose an oversimplification of something as complex as life quality \citep{martinez1998introduction}. However, tools such as the Parkinson's Disease Questionnaires in their different forms have been extensively used and recommended for clinical research \citep{marinus2002health}. Given the proposed study protocol with two diverse centres enrolling subjects independently and sequentially, factors possibly affecting the \ac{PDQ-39} which may be taken into account must meet the following criteria: i) comparative ease of collection and ii) a high degree of reliability, especially between different staff at the remote centres. To assess eligible and representative factors and quantify their impact on the randomisation, we retrospectively collected 144 cases from our tertiary \ac{PD}-patients' outpatient clinic to gain insight into available information during standard-of-care. In a literature review, we aimed at identifying factors with an impact upon the \ac{PDQ-39} scores\footnote{MEDLINE search strategy: ((("parkinson disease"[MeSH Terms] OR ("parkinson"[All Fields] AND "disease"[All Fields]) OR "parkinson disease"[All Fields] OR "parkinsons"[All Fields] OR "parkinson"[All Fields] OR "parkinson's"[All Fields] OR "parkinsonian disorders"[MeSH Terms] OR ("parkinsonian"[All Fields] AND "disorders"[All Fields]) OR "parkinsonian disorders"[All Fields] OR "parkinsonism"[All Fields] OR "parkinsonisms"[All Fields] OR "parkinsons's"[All Fields])) AND (PDQ-39)) AND (influence factor)}. In this search, we could identify effects of affective disorders and especially depression\citep{Rosinczuk2017-rn, Wiesli2017-eq}, of the stage of the disease, of the demographics of affected patients \citep{Wu2014-pk} and of cognitive impairment, all of which negatively influenced \ac{PDQ-39} scores. Regarding our retrospective records, there was information available for all these encountered domains so that we could investigate the distribution (cf. chapter \ref{datmodsec}) for the amount of depressive symptoms as expressed in the \ac{BDI} questionnaire, Gender and age of patients, the stage of the disease according to the Hoehn and Yahr scale, the overall cognitive functioning according to the \ac{MoCA}\citep{nasreddine2005montreal} and a short form of the \ac{PDQ-39} with eight items \acs{PDQ-8} [21]. Analogous to the \ac{PDQ-39}, values between 0 - 100\% result with higher values expressing a more severe impairment.The latter has the great advantage of being much shorter in execution, while it has a correlation with the PDQ-39 \citep{chen2017evaluation}. There were other factors attributable to lower life quality, which had to be discarded either because of unreliable disclosures such as disease duration \citep{Benge2016-wp} or because there is a great amount of variability such as the undeniable effects of other non-motor symptoms \citep{Wu2014-pk, Zipprich2021-vv} but their very variable expressions.
+
+	
+\begin{table}[!ht]
+    \centering {\scriptsize \caption{Demographics of subjects from outpatient clinic}
+    \begin{tabular}{|l|l|}
+    \hline
+        									& Overall 		\\ \hline
+         								& (n = 144) 	\\ \hline
+        Age (mean (SD)) 						& 65.91 (11.61) 	\\ \hline
+        Gender = female (\%) 					& 44 (30.6) 	\\ \hline
+        Disease severity 						&  			\\ \hline
+            Hoehn and Yahr stage 1 				& 9 (8.6) 		\\ \hline
+            Hoehn and Yahr stage 1.5 				& 1 (1.0) 		\\ \hline
+            Hoehn and Yahr stage 2 				& 53 (50.5) 	\\ \hline
+            Hoehn and Yahr stage 2.5 				& 6 (5.7) 		\\ \hline
+            Hoehn and Yahr stage 3 				& 18 (17.1) 	\\ \hline
+            Hoehn and Yahr stage 4 				& 17 (16.2) 	\\ \hline
+            Hoehn and Yahr stage 5 				& 1 ( 1.0)	 	\\ \hline
+        Beck's Depression Inventory score (mean (SD)) 	& 11.43 (8.46) 	\\ \hline
+        Montréal Cognitive Assessment(mean (SD)) 	& 23.80 (5.41) 	\\ \hline
+        PDQ-8 scores (mean (SD)) 				& 23.12 (18.96) 	\\ \hline
+    \end{tabular}
+}
+\end{table}
+
+\section{Data Modelling}
+
+\label{datmodsec}
+
+Because our allocation rules depend on a statistical model of the data, we start with an analysis of the data on the response and five potential prognostic factors taken from patient records (described in \S\ref{varsec}). The analysis leads to building a regression model. In the remaining sections we designate
+the response variable by $pdq8$, the disease stage expressed on H\&Y scale by $h\&y$, the BDI indicator by $bdi$,
+the gender of patients by $Gender$, the age by $Age$ and the Montreal Cognitive Assessment (MoCA) test \citep{nasreddine2005montreal} results by $moca$.
+
+There are data from 144 patients on the response $pdq8$ and on the five prognostic factors. Not all variables are available for all patients, but there are an adequate number to establish the correlations between all variables, which are shown in Table~\ref{Correltab}. The most noticeable features are the correlations of 0.640 and 0.332 between the response $pdq8$ and two of the prognostic factors, i.e. $bdi$ and $h\&y$. These two variables, in turn, have a correlation of 0.325.
+
+\begin{table}[ht]
+\centering {\scriptsize \caption{Correlation matrix between the response and prognostic factors.}
+\label{Correltab}
+\begin{tabular}{ccccccc} \toprule
+&	        $Gender$ &	$Age$	  & $h\&y$	  & $bdi$     &	$moca$    &	$pdq8$ \\ \midrule
+$Gender$	& 1.0000	& 	0.0792	& 	0.0180	& 	-0.1218	&		-0.0376	& 	-0.0807\\
+$Age$			&					& 	1.0000	& 	0.2266	& 	-0.0513	& 	-0.4766	& 	-0.1415\\
+$h\&y$		&					&						&	  1.0000	& 	0.3250	& 	-0.6435	& 	0.3318 \\
+$bdi$			& 				& 					& 					&		1.0000	& 	-0.2689	& 	0.6402 \\
+$moca$		& 				& 					& 					& 					&		1.0000	& 	0.0419 \\
+$pdq8$		&					& 					& 					& 					& 					& 	1.0000 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+The regression of $pdq8$ on all five prognostic factors produces the results reported in Table~\ref{ForSelect}.
+The order of the appearance of the covariates in Table~\ref{ForSelect} is that
+of their entry to the linear model obtained via stepwise regression.
+Surprisingly, in the light of the correlations in Table~\ref{Correltab}, there is significant regression on
+$bdi$ but not on $h\&y$. Due to the correlation between the covariates much of the variability of $pdq8$ explained by $bdi$ is already explained by $h\&y$.
+
+\begin{table}[ht]
+\centering {\scriptsize \caption{Order of addition of covariates to $pdq8$ model (via stepwise regression).}
+\label{ForSelect}
+\begin{tabular}{ccccccccc} \toprule
+Order of addition & Source & SSE 			      &   SSR	            & d.f. & MSE   		& MSR   		     & F 			& Prob$>$F \\ \midrule
+1& Intercept               &                &                   &   1  &      		&       		     &         &  \\
+2& $bdi$                   & \num{4.4768E3} & \num{5.5662E3}    &   1  & 172.1852 & \num{5.5662E3} & 32.3266 & \num{5.560E-6} \\
+3& $Age$                   & \num{4.4280E3} & \num{5.6150E3}    &   1  & 177.1190 & 48.8340        &  0.2757 & 0.6041 \\
+4& $Gender$                & \num{4.3909E3} & \num{5.6521E3}    &   1  & 182.9536 & 37.0898        &  0.2027 & 0.6566 \\
+5& $h\&y$                  & \num{4.3756E3} & \num{5.6674E3}    &   1  & 190.2426 & 15.3065        &  0.0805 & 0.7792 \\
+6& $moca$                  & \num{4.3593E3} & \num{5.6836E3}    &   1  & 198.1522 & 16.2311        &  0.0819  & 0.7774 \\
+\bottomrule
+\multicolumn{9}{l}{SSE - sum of square error; SSR - sum of squares of treatments; d.f. - degrees of freedom; MSE - mean square error (MSE=SSE/(n-d.f.));}\\
+\multicolumn{9}{l}{MSR - incremental mean of squares of treatments (MSR=SSR$_i$-SSR$_{i-1}$); F - F ratio (F=MSR/MSE).}\\
+\end{tabular}
+}
+\end{table}
+
+We checked several models using normal probability plots of the residuals.  The left-hand panel of Figure~\ref{QQplots2models} shows the normal QQ plot of the residuals from least squares regression on just  $bdi$ and the right-hand panel shows a similar plot from regression on both $bdi$ and $h\&y$.
+The plot from regression on two variables is appreciably straighter, indicating a more nearly normal distribution of residuals. This plot is also straighter than that of the residuals from regression on all five variables (not shown). In our exploration of methods for balancing and randomizing treatment allocations we therefore take as our standard allocations those using just two prognostic factors with homoscedastic independent normal errors. However, in \S\ref{incorectsec} we also briefly consider the effect of allocations using fewer or more prognostic factors.
+
+\begin{figure}[ht]
+\centering
+% \subfigure[][]{%
+%\label{QQplot1}%
+%\includegraphics[width=0.45\textwidth]{qqplot1covar}}
+ \hspace*{4mm}%
+ %\subfigure[][]{%
+ %\label{QQplot2}%
+ %\includegraphics[width=0.45\textwidth]{qqplot2covar}}%
+ \caption{Normal probability plot of  residuals from two fitted models:
+  \protect\subref{QQplot1} $pdq8$ vs. $bdi$;
+ \protect\subref{QQplot2} $pdq8$ vs. $h\&y$ and $bdi$.}
+ \label{QQplots2models}
+\end{figure}
+
+As a final introduction to the structure of the data used in our simulations of designs, we give in Figure~\ref{Scatters} scatterplots of the response $pdq8$ against $bdi$and $h\&y$, together with histograms of the distributions of the variables. As is to be expected from the analyses given above, there is a stronger relationship between
+$pdq8$ and $bdi$. Note also that the marginal distribution of $pdq8$ is not normal. Normality is revealed by the residuals from joint regression on these two prognostic factors.
+
+\begin{figure}[ht]
+\centering
+ %\subfigure[][]{%
+ %\label{SCbdipdq}%
+ %\includegraphics[width=0.45\textwidth]{scbdipdq8.png}}
+ \hspace*{4mm}%
+ %\subfigure[][]{%
+ %\label{SChypdq}%
+ %\includegraphics[width=0.45\textwidth]{schypdq8.png}}%
+ \caption{Scatterplot with histogram for:
+  \protect\subref{SCbdipdq} $pdq8$ vs. $bdi$;
+ \protect\subref{SChypdq} $pdq8$ vs. $h\&y$.}
+ \label{Scatters}
+\end{figure}
+
+The plots in Figure~\ref{Scatters} also reveal that the distributions of $bdi$ and $h\&y$ are not far from normal. Similar plots for age and $moca$ show no relationship with the response $pdq8$. They also again show covariate distributions that are close to normal. These comments are important when, in \S\ref{normalsec}, we explore the properties of designs using normally distributed covariates.
+
+\section{Experimental Design}
+
+\label{DesSec}
+
+\subsection{Sequential Optimum Experimental Design}
+
+\label{SeqDesSec}
+
+Patients arrive sequentially. Patient $i$ presents with a vector of $q-1$ prognostic factors $z_i$ and is allocated to one of two treatments, $\tau_1$ or $\tau_2$; the response (here, $pdq8$) for this patient is $y_i$.
+The parameter of interest is  the treatment difference $\Delta = (\tau_1 - \tau_2)/2$.  The regression model for all $n$ observations, in matrix form, is
+\begin{equation}
+\mathbb{E}(\mathbf{Y}) = \mathbf{a} \Delta + \mathbf{1} \beta_0 + \mathbf{Z} \psi = \mathbf{a} \Delta + F \beta = G ~\omega.
+\label{5aca6}
+\end{equation}
+In this model  $\mathbf{a}$ is the $n \times 1$ vector of allocations with elements $+1$
+and $-1$, depending on whether treatment~1 or treatment~2 is
+allocated, and $\mathbf{1}$ is the $n \times 1$ vector of ones. The average effect of the two treatments, written as the constant
+term $\beta_0 = (\tau_1 + \tau_2)/2$, is not of importance. The parameter vector $\psi$ of regression parameters for the prognostic factors is also unimportant, although some  balance is required over these variables, which will be included in the analysis of the data. The constant and covariates are included in the
+$n \times q$ matrix $F$. The value of $q$ is important in determining the properties of some allocation rules.
+
+In sequential treatment allocation the covariates and allocations are known for the first $n$ patients, giving a matrix $G_n$ of allocations and explanatory variables in \eqref{5aca6}. Let patient $n+1$ have a vector  $z_{n+1}$ of explanatory variables. If treatment $j$ is allocated, the vector of allocation and explanatory variables for the $(n+1)$st patient is $g_{j,n+1},\; j = 1,2 $. Results in the sequential construction of optimum experimental designs (see \citet{aca:82} and \citet[\S 10]{rls:84b}) show that the variance of the estimate $\hat{\Delta}$ after $n+1$ observations is minimized by the choice of that treatment for which the derivative function
+\begin{equation}
+d_s(j,n,z_{n+1}) =  g^{\rm T}_{j,n+1}(G_n^{\rm T}G_n)^{-1}  g_{j,n+1} -
+f^{\rm T}_{j,n+1}(F_n^{\rm T}F_n)^{-1}  f_{j,n+1}
+\label{5defd}
+\end{equation}
+is a maximum. This result is a special case of the use of optimum design theory to minimize the variance of a single parameter estimate in a model with several nuisance parameters, a criterion called D$_{\text{s}}$-optimality. See \citet[\S10.3]{ADT:2007} with $s = 1$.
+
+Once the prognostic factors are known for patient $n+1$,  treatment allocation in the sequential optimum design of experiments is determined. This procedure leads to a trial in which the variance of $\hat{\Delta}$ is minimized; there is no allowance for randomization. Randomness in the allocations will provide protection against biases and unexpected trends, but at the cost of a slight loss in efficiency, that is an increase  of the variance of $\hat{\Delta}$.
+
+\subsection{Assessing Rules: Bias and Loss}
+
+\label{BiasLossSec}
+
+The loss from randomization is assessed  from Var($\hat{\Delta}$). Let $b = F^Ta$, a
+``balance'' vector which is identically zero when all
+covariates are balanced across all treatments, which is the goal of the sequential construction of \S\ref{SeqDesSec}. Then
+\begin{equation}
+\mbox{var} (\hat{\Delta}) = \frac{\sigma^2}{n - b^T(F^TF)^{-1}b}
+= \frac{\sigma^2}{n - {L}_n},
+\label{aca8}
+\end{equation}
+giving an explicit expression for calculation of the loss $L_n$.  The loss is minimized for the balanced design when the estimate of $\Delta$  is independent of the estimates of the nuisance parameters. As \eqref{aca8} indicates, the loss quantifies the number of patients on whom information is effectively lost due to imbalance in the trial.
+
+The loss $L_n$  in a specific trial depends on the particular sequence of randomized allocations. In this paper interest is in comparing the properties of various allocation rules, so that the focus is on  the expectation $\mathbb{E}(L_n) = {\mathcal{L}}_n$, approximated by $\bar{L}_n$, the average over $n_{\mbox{sim}}$ simulations. For some allocation rules theory provides a value for the expected value of the loss ${\cal L}_n $  as $n \rightarrow \infty$. However, even in such cases, simulation is informative about trials for moderate values of $n$.
+
+A numerical measure for randomization is selection bias \citep{b+h:57} which measures the ability to guess the next treatment to be allocated. Bias depends on the design, the guessing strategy and, for some rules, the value of $n$. For a particular combination of strategy and design the expected bias ${\mathcal{B}}_n$ is estimated from
+$n_{\mbox{sim}}$ simulations as
+%\begin{adjustwidth}{-\extralength}{0cm}
+\begin{equation}
+{\bar{B}}_n = \frac{\mbox{number of correct guesses of allocation to patient}- \mbox{number of incorrect guesses}}{n_{\mbox{sim}}}. \label{biasn}
+\end{equation}
+%\end{adjustwidth}
+This definition is similar to that of (4.2) of \citet{rls:84b}.
+The guessing strategy used in our numerical comparisons  is the sensible one of guessing that the treatment for which the
+allocation probability is higher will be selected.
+
+Amongst many others, \citet{efr:71} and \citet{rls:84b} consider that selection bias should not be an issue in double-blind trials with treatment allocation made remotely from the trial, although it may be if there are local attempts towards institutional balance \citep{lagakos+:1984}. It is however impossible to blind the trial with which we are concerned. Allocation may be blinded, but the patient and medical staff will know without doubt which treatment has been allocated. For us, then, randomization is particularly important. In general, a trial without randomization appears to lack objectivity. \citet{efr:71} and \citet{rls:84b} accordingly  study the effect of biased-coin designs on freedom from accidental bias due to omitted factors including time trends and, in the case of \citet{rls:84b}, correlated errors and outliers. The conclusion of \citet{rls:84b} is that biased-coin designs that are not completely random provide good protection against several sources of bias and that selection bias is a good measure of the properties of the design.
+
+Randomization and balance are in conflict. The deterministic rule of sequential optimum design minimizes loss. However, the allocation can always be correctly guessed, so that $\mathcal{B}_n = 1$. The antithesis is the random rule in which the treatment is allocated by the toss of a fair coin. This has the maximum loss of all rules we consider, but it is impossible to have any systematic success in guessing the next allocation, so that $\mathcal{B}_n = 0.$  In this paper we study several design strategies intermediate in properties between optimum design and random allocation.
+
+\subsection{Five Allocation Rules}
+
+\label{FiveruleSec}
+
+We now describe the five rules that we compare in a variety of scenarios for randomizing the experiment. Some  of the rules are based on the sequential construction of the optimum design for estimation of $\Delta$.  Let the treatment maximizing \eqref{5defd} be $\tau_{\text{[1]}}$, which is allocated with probability $\pi([1]).$\\
+
+{\it Rule D: Deterministic Allocation.} This is the sequential construction of the D$_{\text{s}}$-optimum design; $\pi_{\text{D}}([1]) = 1 $.
+It follows that $\mathcal{L}_{\infty} =0$ and, since there is no randomization, $\mathcal{B}_{\infty} =1$. The simulations in later sections show that, from very small values of $n$, $\bar{L}_n \to 0$ and $\bar{B}_n \to 1$. \\
+
+{\it Rule A: Randomized D$_{\text{A}}$-optimality.}  \citet{aca:82} introduced a randomized form of the sequential construction of D$_{\text{A}}$-optimum designs. For two treatments the probability of allocation of treatment $j$ is
+\begin{equation}
+\pi_{\text{A}}(j) = \dfrac{d(j,n,z_{n+1})}{d(1,n,z_{n+1})+d(2,n,z_{n+1})}.
+\label{DArandom}
+\end{equation}
+\citet{bur:96} showed that for this rule $\mathcal{L}_{\infty} = q/5$. The values of $d(1,n,z_{n+1})$ and $d(2,n,z_{n+1})$ are not standardized by $n$. As $n$ increases the difference between the two decreases and as $n \rightarrow \infty, \pi_{\text{A}}(j) \rightarrow 0.5$. As a consequence, $\mathcal{B}_{\infty} =0$. \\
+
+{\it Rule E: Efron's Biased Coin.} \citet{efr:71} introduced a design for the sequential comparison of two treatments in which the under-represented treatment was allocated with probability 2/3. In the presence of covariates, but remaining with two treatments, the under-represented treatment is [1]. Then
+\begin{equation}
+\pi_{\text{E}}([1]) = 2/3
+\label{bradsrule}
+\end{equation}
+The loss decreases with $n$ but, from small $n$, the values of $\mathcal{B}_n$ are close to the asymptotic value of 1/3.\\
+
+{\it Rule MwC: Minimization with a Coin.}  The deterministic minimization rule of \cite{p+s:75} depends on calculating the total effect on all  measures of marginal imbalance when treatment $j$ is allocated. With $q-1$ covariates $z$, there will be $q-1$ measures to be summed. The individual measures count the number of observations in each category of the covariate. Continuous covariates therefore have to be categorised.
+
+Let the total effect on imbalance be $C(j)$. The allocations are ranked so that $C([1]) \le  C([2])$.
+In this deterministic allocation treatment [1] is allocated, with random allocation if both treatments have the
+same  value of $C(j)$.
+
+We introduce randomization by replacing certain allocation by the 2/3 of Efron's biased coin. Thus
+\begin{equation}
+\pi_{\text{MwC}}([1]) = 2/3,
+\label{MinwCoin}
+\end{equation}
+with random allocation if there is a tie, as there may well be, since the prognostic factors are discretized.
+The deterministic calculations are exemplified by \cite{senn+val:2010} and \cite{aca:2002} as well as by \cite{p+s:75}.\\
+
+{\it Rule R: Randomized Allocation.} $\pi_{\text{R}}([1]) = 0.5 $. This is the furthest in properties from deterministic allocation, Rule D. Now since there is complete randomization, $\mathcal{B}_{\infty} =0$. A special case of the calculations in \citet{bur:96} is that $\mathcal{L}_{\infty} =q$, a result that goes back at least to \citet{cox:51}.
+
+\section{Sampling from the Multivariate Empirical Distribution of Prognostic Factors}
+
+\label{sampsec}
+
+Simulation is often used, as here, to find the small sample properties of treatment allocation procedures. Many such investigations, such as \citet{aca:2002,aca:2014}, assume that the prognostic factors are uncorrelated and  normally distributed. Here we sample from an approximation to the empirical correlated distribution of the prognostic factors analysed in \S\ref{datmodsec}.
+
+In general, it is difficult to sample from multivariate distributions with arbitrary covariances. One possibility is to sample, with replacement, from the $q-1$ dimensional discrete distribution of the observed covariates. An alternative, which gives more sampling points, is to generate a $q-1$ dimensional multivariate normal sample with the desired correlation and then to transform the normal distributions to have the univariate empirical distributions discussed in \S\ref{datmodsec}.
+
+Let the $q-1$ prognostic factors of patients entering the trial  have the correlation matrix, $\Gamma$, constructed from the data in Table~\ref{Correltab}. Let $\pmb{u}$ be a $q-1$ vector of uncorrelated  standard normal variables which we generate using the Box-Muller algorithm. To generate a vector of  correlated normal random variables $\mathbf{v}$, we first decompose $\Gamma$ using the Cholesky decomposition, i.e.
+$\Gamma=\Lambda~\Lambda^{\rm T}$, where $\Lambda$ is a $(q-1)\times (q-1)$  lower triangular matrix. We then form the elements of the correlated normal $q$ vector for a new patient using the rule
+\begin{subequations}
+\begin{align}
+v_1&=1.0 \label{z1}\\
+v_i&=\sum_{j=1}^{q-1}\Lambda_{i-1,j}~u_j, \quad i=2,\cdots,q \label{zi},
+\end{align}
+\label{cholesky}
+\end{subequations}
+\noindent where \eqref{z1} is for the constant term and \eqref{zi} is for the prognostic factors.
+
+We now further transform the $v_i,i=2,\cdots,q$ to have the desired empirical distribution.   Let the ordered vector of sampled values of the empirical prognostic factors of \S\ref{datmodsec}  for variable $i$ be $\mathbf{s_i}$. Then  $\ldots s_{i,k-1} < s_{i,k} < s_{i,k+1} \ldots$ with cdf $F_i(s_{i,k}) = P(S_i \le s_{i,k})$.  We sample the distribution of $S_i$ using the cdf of the normal distribution of $v_i$ to provide the probabilities for our correlated sample. That is, let $p_i = \Phi(v_i)$, where $\Phi$ is the cdf of the standard normal distribution. Then the values of the simulated covariates $z_i$ are found by numerical search:
+\begin{equation}
+\text{if}\quad  F_i(s_{i,k-1} < p_i \le F_i(s_{i,k}),\quad  z_i = s_{i,k}, \quad i=2,\cdots,q,
+\label{samplecdf}
+\end{equation}
+with $z_1=1.0$.
+
+In our analyses we consider: i. $q=6$, i.e., including all the prognostic factors when samples are extracted via a five-variate normal distribution; ii. $q=3$, including the variables $h\&y$ and $bdi$  and so sampling from a bivariate normal distribution; and iii. $q=2$, only the variable $bdi$ as used for prediction
+of $pdq8$. In this case  samples come from a standard normal distribution and $\Gamma=[1.0]$. For non-correlated prognostic factors we consider only the normal case and put $z_i = v_i$ in \eqref{cholesky} with $\Gamma=I_{q-1}$ where $I_{q-1}$ is the $q-1$ identity matrix.
+
+
+\section{The Trial Design and Comparison of Allocation Rules: Empirical Prognostic Factors}
+
+\label{trialcomp}
+
+\subsection{The Overall Design of the Sequential Trial}
+
+\label{overallsec}
+
+There are two sites for the trial: one is expected to enrol 240 patients and the other 100. It is sensible to randomize separately for the  two centres. One reason is that of robustness of the procedure. It will be more straightforward to run two separate schemes, rather than to rely on communication between the centres and the transfer of covariate information. Practically, separate randomization scheme reduce the probability of confusion and errors. The second reason is that it is possible the distribution of covariates at the two site may be different - perhaps due, for example, to socio-economic or demographic factors. In the data analysis we need to be prepared  to be able to fit models to well-balanced data from the individual sites, as part of the process that, it is to be hoped, will lead to a single model and analysis for all patients.
+
+The properties of randomization rules depend on the number of patients in the trial. Since it is not certain that the two centres will be able to recruit exactly the specified number of patients, we compare the properties of randomization rules for values of $n$ up to 240. These results are  given graphically. Because, however, there are two specific target values of $n$, we also provide tabulations of the properties of the rules for $n=100$ and $240$.
+
+\subsection{Comparison of Allocation Rules: Empirical Prognostic Factors}
+
+\label{compsec}
+
+We start our comparison of the allocation rules taking $q = 3$, that is the intercept and the two prognostic factors $bdi$ and $h\&y$ which are most highly correlated with the response. There were 20,000 simulations in all comparisons.
+
+\begin{figure}[ht]
+\centering
+ %\subfigure[][]{%
+ %\label{Floss2}%
+ %\includegraphics[width=0.45\textwidth]{floss2covar.pdf}}%
+ \hspace*{4mm}%
+ %\subfigure[][]{%
+ %\label{Bias2}%
+ %\includegraphics[width=0.45\textwidth]{bias2covar.pdf}}
+ \caption{Results for model including 3 parameters (the intercept plus 2 covariates corresponding
+to $h\&y$ and $bdi$ -- those with the largest correlation with the response):
+ \protect\subref{Floss2} Loss and
+ \protect\subref{Bias2} Bias, as functions of the number of patients.}
+ \label{2covarplus1}
+\end{figure}
+
+The results are plotted in Figure~\ref{2covarplus1} and summarized in the central panel of Table~\ref{Perf_Correlated}. The left-hand panel of the figure shows the loss for values of $n$ up to 240. Rule R has a loss of 3 $(=q)$ throughout, in line with the results quoted in \S\ref{FiveruleSec}. Reading down in the centre of the plot, the loss for Rule MwC is gradually decreasing, being slightly less than one at $n=240$. The loss for Rule A settles to a value of $q/5 = 0.6$ just after $n = 100$. The loss for Rule E decreases steadily, becoming less than that for Rule A when $n$ is close to 60. It is however always greater than that for Rule D, for which $\mathcal{L}_{\infty} = 0.$
+
+The right-hand panel of the figure shows the plot for bias. This has a simpler structure. Rules R, E and D have constant biases of 1, 1/3 and 0, within sampling fluctuation. The bias for MwC is also constant, but lower than that for Rule E because of the occurrence of ties; the value is close to 0.25 rather than 1/3.  The bias for Rule A, unlike the others, decreases steadily, in line with the argument of \S\ref{FiveruleSec}.
+
+\begin{table}[ht]
+\centering {\scriptsize \caption{Performance of allocation rules after 100 and 240 patients (model
+with correlated empirical covariates).}
+\label{Perf_Correlated}
+\begin{tabular}{ccccccc} \toprule
+ & & \multicolumn{2}{c}{After 100 patients} & &\multicolumn{2}{c}{After 240 patients} \\ \cmidrule{3-4} \cmidrule{6-7}
+Covariates & Rule & Loss & Bias & & Loss & Bias \\ \cmidrule{1-4} \cmidrule{6-7}
+1 & D & 0.0160 & 1.0000 & & 0.0065 & 1.0000 \\
+  & R & 1.9908 & -0.0019 & & 1.9885 & 0.0148 \\
+	& A & 0.4021 & 0.0846 & & 0.3997 & 0.0492 \\
+	& E &  0.1859 & 0.3334 & & 0.0780 & 0.3290 \\
+	& MwC & 0.5117 & 0.2490 & & 0.4237 & 0.2468 \\ \midrule
+2 & D & 0.0389 & 1.0000 & & 0.0161 & 1.0000 \\
+  & R & 3.0153 & -0.0017 & & 3.0135 & -0.0054 \\
+	& A & 0.6156 & 0.1160 & & 0.6051 & 0.0838 \\
+	& E &  0.3985 & 0.3257 & & 0.1658 & 0.3420 \\
+	& MwC & 1.1135 & 0.2444 & & 0.9239 & 0.2462 \\ \midrule
+5 & D & 0.1604 & 1.0000 & & 0.0644 & 1.0000 \\
+  & R & 5.9765 & -0.0011 & & 6.0126 & -0.0076 \\
+	& A & 1.2598 & 0.1737 & & 1.2277 & 0.1131 \\
+	& E & 1.4093 & 0.3414 & & 0.6211 & 0.3389 \\
+	& MwC & 3.0933 & 0.2862 & & 2.4296 & 0.2863 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+We also investigated the properties of the five rules for  two further values of $q$. The two panels of Figure~\ref{1or5Covarplus1} show the plots of loss for $q=2$ and $q = 6$. Now the losses for Rule R are two and six and those for Rule A tend to 0.4 and 6/5 for large $n$. For $q=2$ (the left-hand panel) the losses all proportionately decrease faster than they do for the right-hand panel. This effect is particularly marked for the two rules MwC and E that randomize using Efron's coin. The biases for both values of $q$ are similar in structure to those for $q = 3$ in the right-hand panel of Figure~\ref{2covarplus1} and so are not shown here.
+
+\begin{figure}[ht]
+\centering
+ %\subfigure[][]{%
+ %\label{Floss1}%
+ %\includegraphics[width=0.45\textwidth]{floss1covar.pdf}}%
+ \hspace*{4mm}%
+ %\subfigure[][]{%
+%\label{Floss5}%
+ %\includegraphics[width=0.45\textwidth]{floss5covar.pdf}}%
+ \caption{Losses as a function of $n$. Left-hand panel $q=2$ (just $bdi$) and Right-hand panel $q = 6$ (all prognostic factors).}
+ %\protect\subref{Floss1} Loss function;
+ %\protect\subref{Floss5} Bias function.}
+ \label{1or5Covarplus1}
+\end{figure}
+
+Values of both loss and bias for $q = 6, 3$ and 1 and $n = 100$ and $240$ are in Table~\ref{Perf_Correlated}, these being the two values of importance for the trial on neuro-degenerative diseases. The table confirms the suggestion of the figures that Rule A provides a good compromise between loss and bias, low values of both of which are desirable. More generally, the losses for Rules E and MwC in the right-hand panel of Figure~\ref{1or5Covarplus1} show the poor performance of these two rules as $q$ increases
+
+\section{Extensions}
+
+\label{extsec}
+
+\subsection{Design for an Incorrect Number of Prognostic Factors}
+
+\label{incorectsec}
+
+It may be that a trial is designed with randomization over $q$ prognostic factors but the final data analysis incorporates $r$ factors, where $r$ may be greater than, or less than $q$. Results for allocations using the five rules are in Table~\ref{Perf_CorruptedModels}. The top half of the table is when extra covariates are included in the design: balancing is over five covariates, but only two are used in the data analysis. The lower half of the table is for the reverse situation, when two are included in the design and five are used in the analysis. Comparison of these results with those of Table~\ref{Perf_Correlated} shows very few differences.
+
+There is some recent theoretical work on the properties of deigns when $r > q$, that is ``what is the effect of the randomization on the non-randomized covariates?". Unfortunately, this work does not cover our situation as \citet{liu2020balancing} only consider discretized covariates and \citet{YeYiShaoBka2022} develop a model-free approach. Both papers usefully present details of recent work on covariate-adaptive randomization.
+
+\begin{table}[ht]
+\centering {\scriptsize \caption{Performance of allocation rules after 100 and 240 patients when the
+design is obtained with $q$ covariates and used in a model including $r$ covariates (models
+with correlated empirical covariates).}
+\label{Perf_CorruptedModels}
+\begin{tabular}{ccccc} \toprule
+ & & \multicolumn{1}{c}{After 100 patients} & &\multicolumn{1}{c}{After 240 patients} \\ \cmidrule{2-3} \cmidrule{4-5}
+Covariates ($q/r$) & Rule & Loss & & Loss \\ \cmidrule{1-3} \cmidrule{4-5}
+6/3 & D & 0.0388 & & 0.0161 \\
+  & R & 3.0151   & & 3.0134\\
+	& A & 0.6150   & & 0.6049 \\
+	& E & 0.3986   & & 0.1658 \\
+	& MwC & 1.1136 & & 0.9238 \\ \midrule
+3/6 & D & 0.1594 & & 0.0642 \\
+  & R &   5.9607 & & 5.9545 \\
+	& A &   1.2690 & & 1.2334 \\
+	& E &   1.4152 & & 0.6330 \\
+	& MwC & 3.1035 & & 2.41724 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\subsection{Independent Normal Covariates}
+
+\label{normalsec}
+
+Many simulation studies of treatment allocation in clinical trials, such as \citet{aca:2014} have taken the prognostic factors to be independently normally distributed. We now check whether, in our example, the more complicated simulation strategy we have used leads to results distinct  from those from the simple assumption of normality.
+
+\begin{table}[ht]
+\centering {\scriptsize \caption{Performance of allocation rules after 100 and 240 patients(model with non correlated covariates).}
+\label{Perf_NCCorrelated}
+\begin{tabular}{ccccccc} \toprule
+ & & \multicolumn{2}{c}{After 100 patients} & &\multicolumn{2}{c}{After 240 patients} \\ \cmidrule{3-4} \cmidrule{6-7}
+Covariates & Rule & Loss & Bias & & Loss & Bias \\ \cmidrule{1-4} \cmidrule{6-7}
+2 & D & 0.0389 & 1.0000 & & 0.0161 & 1.0000 \\
+  & R & 3.0153 & -0.0017 & & 3.0135 & -0.0054 \\
+	& A & 0.6156 & 0.1205 & & 0.6056 & 0.0845 \\
+	& E &  0.3975 & 0.3257 & & 0.1662 & 0.3420 \\
+	& MwC & 1.0851 & 0.2447 & & 0.8763 & 0.2487 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+The results for simulations with independent normal prognostic factors when $q=3$ are in Table~\ref{Perf_NCCorrelated}. Comparison with the central panel of Table~\ref{Perf_NCCorrelated} again shows only a few slight differences, here between the use of independent normal prognostic factors and the correlated empirical factors coming from the data. The two largest differences are in the reduction in loss  for Rule MwC when normal covariates are used.
+
+\section{Discussion}
+
+The purpose of our paper is to compare the performance of several randomization rules for treatment allocation for a specific clinical trial on treatment of neuro-degenerative diseases. We were fortunate in having available a preliminary set of data from which we were able to estimate the empirical distribution of the prognostic factors. In order to simulate from this empirical distribution, as we describe in \S\ref{sampsec}, we sampled from correlated normal random variables which were then transformed to have the desired marginal distributions. As far as we know this procedure has not previously been used in the context of randomizing treatment allocation in clinical trials. The results of our simulations suggest the use of randomized forms of sequential design construction based on D- or D$_{s}$-optimality.
+
+Our results indicate, for our example, that a similar assessment of the relative merits of the different rules is obtained by simulations with independent normally distributed prognostic factors. In retrospect this is not surprising, since most of the correlations between covariates are low and four of the variates, including $bdy$ and $h\&y$ plotted in Figure~\ref{Scatters}, have distributions close to normal. It is a matter for further exploration as to how general is this result. For methods that allocate according to a function of the information matrix of the design, it is clear that the distribution of the factors will have little effect on the value of loss as $n \rightarrow \infty$, provided the distribution of the prognostic factors has a finite variance. The behaviour of minimization, without randomization, which we did not consider, depends strongly on the distribution and correlation structure of the prognostic factors. Some details are in Figures~2 and Table~2 of \citet{aca:2002}. However, minimization is not sensitive to a binary covariate, in our case $Age$.  These results also demonstrate the lack of sensitivity of values of loss from Rules  R, A and D to the marginal distributions and correlation of the prognostic factors.
+
+There are many other allocation rules that have been studied in the reviews mentioned in \S\ref{introsec}. One possibility is to use a different function of $d_s(.)$ \eqref{5defd} in the definition of the allocation probability. \citet{aca:2002} developed ideas on the balance between randomness and information in \citet{ball+:93} to replace \eqref{DArandom} with the Bayesian form
+\begin{equation}
+\pi_{\text{B}}(j) = \dfrac{\{1+d(j,n,z_{n+1})\}^{1/\gamma}}{\sum_{k=1}^2\{1+d(k,n,z_{n+1})\}^{1/\gamma}}.
+\label{DBrandom}
+\end{equation}
+An advantage of this rule is that initially, for small $n$, the allocations force balance at the cost of high bias. As $n$ increases the allocation moves towards low bias and a higher loss, although with a proportionately smaller loss for values standardized by $n$. . This rule is particularly appropriate if it is not known when the trial is likely to stop. The rate of change of emphasis in the allocation depends on the value of the parameter $\gamma$. A suitable value for a specified $n$ can be determined by simulation.
+
+\begin{figure}[ht]
+  \centering
+  %\f[width=0.6\textwidth]{biasloss2covar}
+  \caption{Normalized loss vs. bias for $q=3$: empirical correlated covariates. The symbol ``$\square$'' indicates the performance after
+	100 patients, and ``$\smalltriangledown$'' the performance after 240 patients.}
+  \label{NormLossBias}
+\end{figure}
+
+In general, all rules involve a trade-off between bias and loss. Comparisons are helped by the use of the normalized loss, scaled to lie between zero and one:
+\begin{equation}
+\text{Normalized loss}=\text{Loss}/{q}. \nonumber
+\end{equation}
+Figure~\ref{NormLossBias} presents the normalized loss vs. bias for all rules for $q=3$. As we have seen from earlier figures, the comparative properties of the rules depend upon the value of $n$. We have marked the values for $n = 100$ and 240 on the plot. It is clear that, for all rules except R, increasing $n$ leads to decreasing loss. It is also clear from the closeness of the plotted symbols for $n = 100$ and $n = 240$ that the majority of the change in properties occurs ro small values of $n$.
+
+ The concept of the  admissibility of a rule \citep{aca:2002} is helpful in interpreting such plots. Small value of both loss and bias are desirable: if Rule 2 has higher levels of bias and loss than Rule 1, then Rule 2 is inadmissable. Rules D and R are always admissible, since they respectively have the minimum values of loss and bias. Figure~\ref{NormLossBias} shows that Rule MwC is inadmissible compared with Rule A, for both values of $n$ of interest. Rule E has lower loss for these values of $n$ than does Rule A. However, the bias is greater; admissibility does not provide a rationale for preferring one design to the other.
+
+\begin{table}[ht]
+\centering {\scriptsize \caption{Performance of allocation rules A and R for 100 and 240 patients - percentage of loss per patient.}
+\label{Perf_100and240}
+\begin{tabular}{cccccc} \toprule
+  & \multicolumn{2}{c}{For 100 patients} & &\multicolumn{2}{c}{For 240 patients} \\ \cmidrule{2-3} \cmidrule{5-6}
+ Rule & \% Loss & Bias & & \% Loss &  Bias \\ \cmidrule{1-3} \cmidrule{5-6}
+   A & 0.62 & 0.12 & & 0.25 & 0.08 \\
+   R & 3.02 & 0.00 & & 1.26 & 0.00 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+The situation in the trial of this paper is simple; we require to find good allocation rules for just two values of $n$; 100 and 240. Table~\ref{Perf_100and240} gives results, extracted from Table~\ref{Perf_Correlated} for Rules A and R, where  loss is expressed as a percentage of the number of patients. For Rule A  the percentage loss when $n = 100$ is 0.62, rising to 3.0 if Rule R is used. This number may well represent too large a loss of information despite the value of zero for bias.
+However, when $n = 240$, the percentage loss for Rule R is only 1.52. We therefore suggest that Rule A be used for the centre with 100 patients and Rule R for the centre with 240 patients, the larger sample size leading to a lower potential bias from allocation. Since the centres are randomizing
+independently, we see no reason why the two sites should follow the same allocation rule.
+
+
+\bibliography{robustnew10Dec2014}
+
+\section{Acronyms}
+\begin{acronym}
+\acro{BDI}[BDI]{Beck's Depression Inventory-II}
+
+\acro{G-BA}[G-BA]{Gemeinsamer Bundesausschuß}
+\acro{MoCA}[MoCA]{Montréal Cognitive Assessment}
+
+\acro{PD}[PD]{Parkinson's disease}
+\acro{PDQ-8}[PDQ-8]{Parkinson's disease Questionnaire (8 items)}
+\acro{PDQ-39}[PDQ-39]{Parkinson's disease Questionnaire (39 items)}
+
+\end{acronym}
+
+\end{document}
+
