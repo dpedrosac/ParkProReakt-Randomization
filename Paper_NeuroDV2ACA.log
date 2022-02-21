@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.10) (preloaded format=pdflatex 2021.10.14)  18 FEB 2022 00:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.10) (preloaded format=pdflatex 2021.10.14)  20 FEB 2022 23:28
 entering extended mode
 **./Paper_NeuroDV2ACA.tex
 (Paper_NeuroDV2ACA.tex
@@ -1232,106 +1232,126 @@ LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
 
 (C:\Program Files\MiKTeX\tex/latex/psnfss\ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [2]
-Overfull \hbox (54.67998pt too wide) in paragraph at lines 123--124
-\OT1/ptm/m/n/12 toms such as de-pres-sion, ap-a-thy and sleep dis-tur-bances []
- [DOI:https://doi.org/10.1016/S0140-
+) [2] [3]
+Underfull \hbox (badness 10000) in paragraph at lines 126--126
+[][][]\OT1/ptm/m/n/10 https://innovationsfonds.g-ba.de/projekte/neue-versorgung
+sformen/parkproreakt-proaktive-
  []
 
-[3] [4] [5]
+Package acronym Info: Label `acro:PDQ-39' newly defined as it shall be overridd
+en
+although it is yet undefined on input line 126.
+[4]
+Package acronym Info: Label `acro:BDI' newly defined as it shall be overridden
+although it is yet undefined on input line 133.
+Package acronym Info: Label `acro:MoCA' newly defined as it shall be overridden
+
+although it is yet undefined on input line 133.
+Package acronym Info: Label `acro:PDQ-8' newly defined as it shall be overridde
+n
+although it is yet undefined on input line 133.
+ [5]
 \openout5 = `Paper_NeuroDV2ACA.ttt'.
 
- (Paper_NeuroDV2ACA.ttt) [6]
+ (Paper_NeuroDV2ACA.ttt)
 \openout4 = `Paper_NeuroDV2ACA.fff'.
 
- (Paper_NeuroDV2ACA.fff) [7] [8]
-Overfull \hbox (32.43274pt too wide) detected at line 320
+ (Paper_NeuroDV2ACA.fff) [6] [7]
+Overfull \hbox (32.43274pt too wide) detected at line 274
 [] \U/matha/m/n/12  []\OML/cmm/m/it/12 :
  []
 
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 288--289
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--335
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 290--292
 
  []
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 336--338
+Underfull \hbox (badness 10000) in paragraph at lines 297--299
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 343--345
+Underfull \hbox (badness 10000) in paragraph at lines 304--306
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 350--352
-
- []
-
-
-Overfull \hbox (7.00159pt too wide) in paragraph at lines 359--360
+Overfull \hbox (7.00159pt too wide) in paragraph at lines 313--314
 []\OT1/ptm/m/n/12 We in-tro-duce ran-dom-iza-tion by re-plac-ing cer-tain al-lo
 -ca-tion by the 2/3 of Efron's
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 363--366
+Underfull \hbox (badness 10000) in paragraph at lines 317--320
 
  []
 
 [10] [11] [12] [13]
-Overfull \hbox (2.30798pt too wide) in paragraph at lines 522--523
+Overfull \hbox (2.30798pt too wide) in paragraph at lines 476--477
 []\OT1/ptm/m/n/12 Many sim-u-la-tion stud-ies of treat-ment al-lo-ca-tion in cl
 in-i-cal tri-als, such as Atkin-
  []
 
-[14] [15] (Paper_NeuroDV2ACA.bbl [16] [17] [18])
-AED endfloat: Processing end Figures and Tables [19] (Paper_NeuroDV2ACA.fff
+[14] [15] (Paper_NeuroDV2ACA.bbl [16] [17] [18] [19])
 
-LaTeX Warning: Reference `sub@QQplot1' on page 20 undefined on input line 12.
-
-
-LaTeX Warning: Reference `sub@QQplot2' on page 20 undefined on input line 12.
+LaTeX Warning: Hyper reference `acro:G-BA' on page 20 undefined on input line 5
+48.
 
 
-LaTeX Warning: Reference `sub@QQplot1' on page 20 undefined on input line 12.
+LaTeX Warning: Hyper reference `acro:G-BA' on page 20 undefined on input line 5
+48.
+
+AED endfloat: Processing end Figures and Tables [20] (Paper_NeuroDV2ACA.fff
+
+LaTeX Warning: Reference `sub@QQplot1' on page 21 undefined on input line 12.
 
 
-LaTeX Warning: Reference `sub@QQplot2' on page 20 undefined on input line 12.
-
-[20
+LaTeX Warning: Reference `sub@QQplot2' on page 21 undefined on input line 12.
 
 
-]
-
-LaTeX Warning: Reference `sub@SCbdipdq' on page 21 undefined on input line 28.
+LaTeX Warning: Reference `sub@QQplot1' on page 21 undefined on input line 12.
 
 
-LaTeX Warning: Reference `sub@SChypdq' on page 21 undefined on input line 28.
+LaTeX Warning: Reference `sub@QQplot2' on page 21 undefined on input line 12.
 
 [21
 
+
 ]
 
-LaTeX Warning: Reference `sub@Floss2' on page 22 undefined on input line 45.
+LaTeX Warning: Reference `sub@SCbdipdq' on page 22 undefined on input line 28.
 
 
-LaTeX Warning: Reference `sub@Bias2' on page 22 undefined on input line 45.
-
-
-LaTeX Warning: Reference `sub@Floss2' on page 22 undefined on input line 45.
-
-
-LaTeX Warning: Reference `sub@Bias2' on page 22 undefined on input line 45.
+LaTeX Warning: Reference `sub@SChypdq' on page 22 undefined on input line 28.
 
 [22
 
-] [23
+]
 
-]) [24
+LaTeX Warning: Reference `sub@Floss2' on page 23 undefined on input line 45.
 
-] (Paper_NeuroDV2ACA.ttt [25
+
+LaTeX Warning: Reference `sub@Bias2' on page 23 undefined on input line 45.
+
+
+LaTeX Warning: Reference `sub@Floss2' on page 23 undefined on input line 45.
+
+
+LaTeX Warning: Reference `sub@Bias2' on page 23 undefined on input line 45.
+
+[23
+
+] [24
+
+]) [25
+
+] (Paper_NeuroDV2ACA.ttt [26
 
 
 ]
@@ -1339,34 +1359,31 @@ Overfull \hbox (59.90012pt too wide) in paragraph at lines 21--34
  [][] 
  []
 
-[26
-
-] [27
+[27
 
 ] [28
 
 ] [29
 
-]) [30
+] [30
+
+]) [31
 
 ] (Paper_NeuroDV2ACA.aux)
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `Paper_NeuroDV2ACA.out' has not changed.
 (rerunfilecheck)             Checksum: 05D2BF32D7AE8C582A96FE454EF80931;3707.
  ) 
 Here is how much of TeX's memory you used:
- 28354 strings out of 478927
- 529519 string characters out of 2862391
- 790464 words of memory out of 3000000
- 45599 multiletter control sequences out of 15000+600000
- 440426 words of font info for 114 fonts, out of 8000000 for 9000
+ 28437 strings out of 478927
+ 531064 string characters out of 2862391
+ 791897 words of memory out of 3000000
+ 45660 multiletter control sequences out of 15000+600000
+ 441504 words of font info for 115 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,10n,97p,1368b,2728s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 99i,10n,97p,1735b,2745s stack positions out of 5000i,500n,10000p,200000b,80000s
  <C:\Users\dpedr\AppData\Local\MiKTeX\fonts/pk/ljfour/public/mathabx/dpi600\m
 atha6.pk> <C:\Users\dpedr\AppData\Local\MiKTeX\fonts/pk/ljfour/public/mathabx/d
 pi600\mathb10.pk> <C:\Users\dpedr\AppData\Local\MiKTeX\fonts/pk/ljfour/public/m
@@ -1390,9 +1407,9 @@ pe1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files/MiKTeX/fonts/type1/urw
 b><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/M
 iKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw
 /times/utmri8a.pfb>
-Output written on Paper_NeuroDV2ACA.pdf (30 pages, 318275 bytes).
+Output written on Paper_NeuroDV2ACA.pdf (31 pages, 329431 bytes).
 PDF statistics:
- 498 PDF objects out of 1000 (max. 8388607)
- 76 named destinations out of 1000 (max. 500000)
+ 561 PDF objects out of 1000 (max. 8388607)
+ 97 named destinations out of 1000 (max. 500000)
  157 words of extra memory for PDF output out of 10000 (max. 10000000)
 

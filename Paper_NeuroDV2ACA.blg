@@ -5,47 +5,48 @@ Reallocating 'name_of_file' (item size: 1) to 21 items.
 The style file: elsarticle-num-names.bst
 Reallocating 'name_of_file' (item size: 1) to 19 items.
 Database file #1: robustnew10Dec2014.bib
+Warning--I didn't find a database entry for ""
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Warning--empty pages in lagakos+:1984
-You've used 24 entries,
+You've used 35 entries,
             2918 wiz_defined-function locations,
-            782 strings with 9112 characters,
-and the built_in function-call counts, 15333 in all, are:
-= -- 1086
-> -- 618
-< -- 13
-+ -- 237
-- -- 207
-* -- 1814
-:= -- 2189
-add.period$ -- 26
-call.type$ -- 24
-change.case$ -- 186
-chr.to.int$ -- 24
-cite$ -- 25
-duplicate$ -- 1152
-empty$ -- 1151
-format.name$ -- 278
-if$ -- 2794
+            864 strings with 11816 characters,
+and the built_in function-call counts, 24628 in all, are:
+= -- 1718
+> -- 1163
+< -- 14
++ -- 446
+- -- 399
+* -- 3040
+:= -- 3522
+add.period$ -- 37
+call.type$ -- 35
+change.case$ -- 306
+chr.to.int$ -- 35
+cite$ -- 36
+duplicate$ -- 1758
+empty$ -- 1720
+format.name$ -- 505
+if$ -- 4438
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 237
-newline$ -- 127
-num.names$ -- 98
-pop$ -- 413
+missing$ -- 379
+newline$ -- 184
+num.names$ -- 142
+pop$ -- 626
 preamble$ -- 1
-purify$ -- 187
+purify$ -- 306
 quote$ -- 0
-skip$ -- 262
+skip$ -- 371
 stack$ -- 0
-substring$ -- 704
-swap$ -- 845
+substring$ -- 1122
+swap$ -- 1388
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 204
+type$ -- 306
 warning$ -- 1
-while$ -- 107
+while$ -- 162
 width$ -- 0
-write$ -- 321
-(There was 1 warning)
+write$ -- 466
+(There were 2 warnings)
