@@ -106,11 +106,9 @@ Our focused objective is to provide a scientific basis for the randomization sch
 
 Because we have a clear objective we do not provide a general survey of randomization methods in clinical trials. Such a survey can be found in \citet{ros+l:2016}. Several of the methods we compare are derived from forms of randomized treatment allocation introduced by \citet{aca:82} using the methods of optimum experimental design. These were extended by \citet{aca:2002} to include comparisons of the statistical properties of the designs, particularly the loss of efficiency due to randomization and potential bias from the ability to guess the next treatment to be allocated. Both that paper and \citet{ros+sverd:2008} contain background material on randomization in sequential clinical trials in the presence of covariates. A recent review of inference after covariate-adaptive randomization is \citet{MaHuCovar:2020}. The review of \citet{sverdlov2020optimal} focuses on the use of the methods of optimum experimental design in clinical trials.
 
-The paper is organized as follows. The medical background and the structure of the proposed two-treatment trial, to be performed at two sites,  are described in \S\ref{backsec}, followed in \S\ref{datmodsec} by the statistical analysis of the sample values of  the five covariates (prognostic factors)  which may be used in the analysis of the trial results. The analysis of the sample results shows that two variables are important and that a linear regression model should be appropriate for analysis of the clinical trial. The use of randomised forms of the sequential construction of optimum experimental design in sequential clinical trials is introduced in \S\ref{DesSec}. The two important measures of the performance of a trial design, loss and bias, are formalized in \S\ref{BiasLossSec}. Protection against the biases that can be introduced by the absence of proper randomization is especially important in an unblinded trial such as the one we describe. Section~\ref{FiveruleSec} presents five allocation rules, ranging from deterministic allocation which minimizes the variance of the estimated treatment difference, to random selection of the treatment to be allocated. We also investigate a randomized version of the minimization rule of \citet{p+s:75}.
+The paper is organized as follows. The medical background and the structure of the proposed two-treatment trial, to be performed at two sites,  are described in \S\ref{backsec}, followed in \S\ref{datmodsec} by the statistical analysis of the sample values of  the five covariates (prognostic factors) which may be used in the analysis of the trial results. The analysis of the sample results shows that two variables are important and that a linear regression model should be appropriate for analysis of the clinical trial. The use of randomised forms of the sequential construction of optimum experimental design in sequential clinical trials is introduced in \S\ref{DesSec}. The two important measures of the performance of a trial design, loss and bias, are formalized in \S\ref{BiasLossSec}. Protection against the biases that can be introduced by the absence of proper randomization is especially important in an unblinded trial such as the one we describe. Section~\ref{FiveruleSec} presents five allocation rules, ranging from deterministic allocation which minimizes the variance of the estimated treatment difference, to random selection of the treatment to be allocated. We also investigate a randomized version of the minimization rule of \citet{p+s:75}.
 
 We use simulation to compare these five rules. A major novelty of our approach is the use of the empirical sample of potential covariates to provide a sampling distribution of covariates, which have some correlations, rather than assuming independent normal distributions for covariate values. The algorithm is in two stages described in \S\ref{sampsec}: sampling of correlated multivariate normal variates is followed by marginal transformation of the sampled normal variates  to samples from the empirical marginal distributions of the covariates. The main numerical results on the comparison of allocation rules is in \S\ref{sampsec}. Extensions in \S\ref{extsec} explore (i) the effects of designing for either more or fewer covariates than are used in the analysis and (ii) how comparisons of trial designs change if  independent normal covariates are sampled instead of those with the empirical distribution. The final section discusses a few more general topics, including a further sampling rule and the use of a concept admissibility in the comparison of trial designs. The paper concludes with recommendations for randomization rules at the two trial sites.
-
-
 
 \section{Background}
 
@@ -120,17 +118,17 @@ We use simulation to compare these five rules. A major novelty of our approach i
 
 \label{trialsec}
 
-\ac{PD} ranges among the most common neurodegenerative disorders. The disease is mainly characterized by its cardinal motor symptoms bradykinesia, tremor and rigidity, but growing evidence indicates major disability due to non-motor symptoms such as depression, apathy and sleep disturbances \citet{} [DOI:https://doi.org/10.1016/S0140-6736(21)00218-X]. The very heterogeneous disease phenotype may account for a great amount of health-related quality of life restrictions but also burden (informal) caregivers severly \citet{} [Kalia \& Lang, 2015]. With ageing Western societies and the first symptoms of \ac{PD} usually appearing around the age of 60, current forecasts point to an increasing burden on health systems, but also pose the problem of having to provide universal care for the often very specific problems associated with the progression of \ac{PD} [Heinzel et al. 2020; Dorsey et al. 2018].
+\ac{PD} ranges among the most common neurodegenerative disorders. The disease is mainly characterized by its cardinal motor symptoms bradykinesia, tremor and rigidity, but growing evidence indicates major disability due to non-motor symptoms such as depression, apathy and sleep disturbances \citet{Bloem2021-ov}. The very heterogeneous disease phenotype may account for a great amount of health-related quality of life restrictions but also burden (informal) caregivers severly \citet{Kalia2015-ty}. With ageing Western societies and the first symptoms of \ac{PD} usually appearing around the age of 60, current forecasts point to an increasing burden on health systems, but also pose the problem of having to provide universal care for the often very specific problems associated with the progression of \ac{PD} \citet{Heinzel2018-ff, Dorsey2018-mc}.
 
-In Germany, care coordination is primarily the responsibility of the resident neurologists and, in some cases, general practitioners. Normally, outpatient care is often only provided once a quarter by the resident neurologists. The coordination of therapies that are tailored to individual needs and the involvement of specially trained care professionals such as Parkinson Nurses are rarely implemented Prell et al. 2020.
-In the case of non-mobile patients, these deficits are further aggravated as trips to the doctor's office become even more challenging and home visits are rare in Germany Stangl et al., 2020 - a problem that increases with the degree of illness.
+In Germany, care coordination is primarily the responsibility of the resident neurologists and, in some cases, general practitioners. Normally, outpatient care is often only provided once a quarter by the resident neurologists. The coordination of therapies that are tailored to individual needs and the involvement of specially trained care professionals such as Parkinson Nurses are rarely implemented  \citet{Prell2020-bc}.
+In the case of non-mobile patients, these deficits are further aggravated as trips to the doctor's office become even more challenging and home visits are rare in Germany \citet{Stangl2020} - a problem that increases with the degree of illness.
 
-However, this situation is not sustainable. Therefore, modern therapies, especially for neuro-degenerative diseases, are increasingly moving towards a holistic approach to patient care Rajan et al. 2020. Technological advances open up new possibilities in the field of healthcare provision and professional collaboration. The attractiveness of digital technologies lies in their ability to mitigate both mobility-related barriers and economic obstacles. Digital solutions are also suitable for evaluating the disease activity of movement disorders, since tests developed for this purpose can be easily implemented within the framework of eHealth solutions. In Germany, there are  mostly regionally implemented digital solutions for PD patients available, but there are no nation-wide healthcare models available van Munster et al. 2020, Stangl et al. 2020.
-As part of the "ParkProReakt" project, a cross-sectoral, proactive, needs-oriented and technology-supported care model is being developed. The aim of this project is to improve healthcare and achieve a measurably improved quality of life for PD patients. In addition, care givers should be relieved, since the use of digital solutions supports them in assessing the change in the course of the disease. This project is funded under a programme of the federal German government, which, however, is located in the territory of the Ministry of Health Gemeinsamer Bundesausschuss, n.d.. 
+However, this situation is not sustainable. Therefore, modern therapies, especially for neuro-degenerative diseases, are increasingly moving towards a holistic approach to patient care  \citet{rajan2020integrated}. Technological advances open up new possibilities in the field of healthcare provision and professional collaboration  \citet{achey2014past}. The attractiveness of digital technologies lies in their ability to mitigate both mobility-related barriers and economic obstacles. Digital solutions are also suitable for evaluating the disease activity of movement disorders, since tests developed for this purpose can be easily implemented within the framework of eHealth solutions. In Germany, there are  mostly regionally implemented digital solutions for PD patients available, but there are no nation-wide healthcare models available \citet{Stangl2020, van2020building}.
+As part of the "ParkProReakt" project, a cross-sectoral, proactive, needs-oriented and technology-supported care model is being developed. The aim of this project is to improve healthcare and achieve a measurably improved quality of life for PD patients. In addition, care givers should be relieved, since the use of digital solutions supports them in assessing the change in the course of the disease. This project is funded under a programme of the federal German government, which, however, is located in the territory of the Ministry of Health (Homepage: https://t1p.de/8o3t0) \ac{@David: we can also remove this link - what do you think?}. 
 
-The healthcare model is being evaluated as part of a clinical study where we will look the perception of healthcare professionals working in the model, the impact in the everyday life of people with PD, the economic benefits as well as the effects on patients quality of life.
+The healthcare model is being evaluated as part of a clinical study where we will look the perception of healthcare professionals working in the model, the impact in the everyday life of people with \ac{PD}, the economic benefits as well as the effects on patients quality of life.
 
-We will include sequentially a certain number of people at two centres of different sizes. Both centres will accompany and treat a number of patients who are divided 1:1 into controls (receiving only standard care) and an intervention group (with the complex care we developed). Our sample size calculation, in terms of quality of life and according to previous publications REFERENCES, is based on a total of:
+We will include sequentially a certain number of people at two centres of different sizes. Both centres will accompany and treat a number of patients who are divided 1:1 into controls (receiving only standard care) and an intervention group (with the complex care we developed). Our sample size calculation, in terms of quality of life and according to previous publications \citet{Butterfield2017-uc, Mestre2021-od, horvath2017changes} is based on a total of:
 
 Centre 1 = 92/92 and Centre 2 = 54/54, i.e. in total 292 people. There may be some change
 in the ratio between the centres, but not in the number of cases.
@@ -140,44 +138,30 @@ in the ratio between the centres, but not in the number of cases.
 
 \label{varsec}
 
-Results from a representative sample of Marburg's patients. There seem to be two important prognostic factors on which balance is required.
+Patients Health-related Quality of life (QoL), will be the response variable. QoL can be measured with various tools, however the following two questionnaires are frequently used: i. the Parkinson's Disease Questionnaire with 39 items (PDQ-39); and ii. with 8 items (PDQ-8). 
+The PDQ-8 \citep{peto1998pdq} is the patient reported outcome measure constructed by taking one question from each of the eight domain of PDQ-39 \citep{jenkinson1997parkinson}. It may be argued, that both questionnaires pose an oversimplification of what really reduces or represents something complex such as QoL \citep{martinez1998introduction}. However, both questionnaires have been extensively used and recommended for clinical research \citep{marinus2002health}. While the PDQ-39 allows a better and wider characterization of QoL than the PDQ8, the last is more practical to use. Several authors report a strong correlation between the results of both \citet{chen2017evaluation}. When comparing with other QoL measures, the PDQ-39 performes the best in terms of reliability and validity \citep{marinus2002health}, which is why we finally decided on the PDQ-39 as the outcome.
 
-Response variable: Quality of life (QoL), which can be measured with two questionnaires similar: i.
-the Parkinson's Disease Questionnaire (PDQ) with 39 items ; and ii. the PDQ with 8 items. {\color{blue}{BD: The 8-item
-disease questionnaire (PDQ8) \citep{peto1998pdq} is the patient reported outcome measure constructed by taking one question from each of the eight domain of PDQ39
-\citep{jenkinson1997parkinson}.}} Of course both pose an oversimplification of
-what really reduces or represents something a bit abstract such as QoL actually is but it's our primary endpoint and both have been
-extensively used. {\color{blue}{BD: The PDQ with 39 items (PDQ39) allows a better and wider characterization of QoL than the PDQ8,
-but the last is more practical to use and several authors report a strong correlation between the results of both,
-see \citet{chen2017evaluation}}}.
+In order to identify relevant prognostic factors that influence our response variable, we examined a representative sample of Marburg's\ac{PD}-patients. The demographic of the sample can be found in table XY \ac{@David: insert demographics}. Our results indicate, that there seem to be two important prognostic factors on which balance is required.
 
-Prognostic Factor 1: Stage of the disease indicated on Hoehn and Yahr scale (H\&Y). Increasing values indicate more severe affection on an ordinal scale. I find it somehow arbitrary, but it's very common and easy to assess, and therefore very useful. It is also described here:
-\url{https://en.wikipedia.org/wiki/Hoehn\_and\_Yahr\_scale}.
+Prognostic Factor 1: Stage of the disease indicated on Hoehn and Yahr scale (H\&Y) \citep{hoehn1998parkinsonism}. Increasing values indicate more severe affection on an ordinal scale. 
+
+	Comment David: I find it somehow arbitrary, but it's very common and easy to assess, and therefore very useful. It is also described here: \url{https://en.wikipedia.org/wiki/Hoehn\_and\_Yahr\_scale}.
 
 Prognostic Factor 2: Beck's Depression Inventory (BDI). This indicator is determined from a questionnaire, see \citet{beck1988bhs}. Values from 10 and higher indicate increasing levels of depression.
 
-Other factors seemed not to be important in their data. But here are some results.
+Comment David: Other factors seemed not to be important in their data. But here are some results. 
+	\ac{@David: let me know if I should insert anything here}
+	
+	Marlena has done a short literature search and there are of course different aspects that negatively correlate
+	with the PDQ39, such as depressive symptoms, disease duration, stage of the disease but also simple things such as age and gender.
+	She has summarised everything in a table that you can find enclosed. But in a nutshell, these are the important factors described in the literature:
+	Psychological Well-being/ Neuropsychiatric symptoms (Depression, Anxiety)
+	Disease duration/ Stage of Disease
+	Demographic (Age, Gender, Area of Living, Income)
+	Cognitive Impairment
 
-
-Marlena has done a short literature search and there are of course different aspects that negatively correlate
-with the PDQ39, such as depressive symptoms, disease duration, stage of the disease but also simple things such as age and gender.
-She has summarised everything in a table that you can find enclosed. But in a nutshell, these are the important factors described in the literature:
-
-Psychological Well-being/ Neuropsychiatric symptoms (Depression, Anxiety)
-
-Disease duration/ Stage of Disease
-
-Demographic (Age, Gender, Area of Living, Income)
-
-Cognitive Impairment
-
-After that we collected a sample of about 150 patients from our outpatient ward, of which many filled out at least some of the
-questionnaires we tried to replicate this and below you can find the demographics. But if you look at correlations, there are
-significant correlations with disease stage but especially with depression but no gender differences and no correlations with age
-or the cognitive functioning (Moca).
-
-pdq8 - Life quality (QoL) measured on a percentage scale (0-100\%). Higher values show less quality of life due to more restrictions on aspects presumably related to QoL.
-
+After that we collected a sample of about 150 patients from our outpatient ward, of which many filled out at least some of the questionnaires we tried to replicate this and below you can find the demographics. But if you look at correlations, there are significant correlations with disease stage but especially with depression but no gender differences and no correlations with age or the cognitive functioning (Moca). pdq8 - Life quality (QoL) measured on a percentage scale (0-100\%). Higher values show less quality of life due to more restrictions on aspects presumably related to QoL.
+	
 \section{Data Modelling}
 
 \label{datmodsec}
